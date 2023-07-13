@@ -1,1 +1,1 @@
-# Petstore project
+# Petstore project with eclipse-dirigible
