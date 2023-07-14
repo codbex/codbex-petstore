@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="page" ng-controller="PageController">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=" dg-brand-icon />
+		<title dg-brand-title></title>
+		<theme></theme>
+		<script type="text/javascript"
+			src="/services/js/resources-core/services/loader.js?id=application-view-js"></script>
+		<link type="text/css" rel="stylesheet"
+			href="/services/js/resources-core/services/loader.js?id=application-view-css" />
+
+		<script type="text/javascript" src="controller.js"></script>
+	</head>
+
+	<body class="dg-vbox" dg-contextmenu="contextMenuContent">
+		<fd-toolbar has-title="true">
+			<fd-toolbar-title>Items ({{dataCount}})</fd-toolbar-title>
+			<fd-toolbar-spacer></fd-toolbar-spacer>
+			<fd-button compact="true" dg-type="transparent" dg-label="Create" ng-click="createEntity()"></fd-button>
+		</fd-toolbar>
+
+		<fd-scrollbar class="dg-full-height">
+			<table fd-table display-mode="compact">
+				<thead fd-table-header sticky="true">
+					<tr fd-table-row>
+						<th fd-table-header-cell>username</th>
+						<th fd-table-header-cell>firstname</th>
+						<th fd-table-header-cell>lastname</th>
+						<th fd-table-header-cell>email</th>
+						<th fd-table-header-cell>password</th>
+						<th fd-table-header-cell>phone</th>
+						<th fd-table-header-cell>status</th>
+						<th fd-table-header-cell>profileUrl</th>
+						<th fd-table-header-cell></th>
+					</tr>
+				</thead>
+				<tbody fd-table-body>
+					<tr fd-table-row hoverable="true" ng-show="data.length == 0">
+						<td fd-table-cell no-data="true">No data available.</td>
+					</tr>
+					<tr fd-table-row hoverable="true" ng-repeat="next in data"
+						dg-selected="next.id === selectedEntity.id" ng-click="selectEntity(next)">
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.username}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.firstname}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.lastname}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.email}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.password}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.phone}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.profileUrl}}</td>
+						<td fd-table-cell fit-content="true">
+							<fd-popover>
+								<fd-popover-control>
+									<fd-button compact="true" glyph="sap-icon--overflow" dg-type="transparent"
+										aria-label="Context Menu" ng-click="setTristate()">
+									</fd-button>
+								</fd-popover-control>
+								<fd-popover-body dg-align="right">
+									<fd-menu no-backdrop="true" no-shadow="true">
+										<fd-menu-item title="View Details" ng-click="openDetails(next)"></fd-menu-item>
+										<fd-menu-item title="Edit" ng-click="updateEntity(next)"></fd-menu-item>
+										<fd-menu-item title="Delete" ng-click="deleteEntity(next)"></fd-menu-item>
+									</fd-menu>
+								</fd-popover-body>
+							</fd-popover>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</fd-scrollbar>
+
+		<fd-pagination class="fd-margin-bottom--sm" total-items="dataCount" items-per-page="dataLimit"
+			items-per-page-options="[10, 20, 50]" page-change="loadPage(pageNumber)"
+			items-per-page-change="loadPage(pageNumber)" items-per-page-placement="top-start" compact="true"
+			display-total-items="true" ng-hide="dataCount == 0">
+		</fd-pagination>
+
+
+	</body>
+
+</html>
