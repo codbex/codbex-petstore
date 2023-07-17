@@ -8,7 +8,7 @@ const viewData = {
     label: "Users",
     factory: "frame",
     region: "center",
-    link: "/services/web/edm/gen/ui/Users/Users/index.html",
+    link: "/services/web/codbex-petstore/gen/ui/Users/Users/index.html",
 };
 
 if (typeof exports !== 'undefined') {

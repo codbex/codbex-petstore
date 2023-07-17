@@ -6,7 +6,7 @@
 const viewData = {
     id: "Users-details",
     label: "Users",
-    link: "/services/web/edm/gen/ui/Users/Users/dialog-window/index.html"
+    link: "/services/web/codbex-petstore/gen/ui/Users/Users/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

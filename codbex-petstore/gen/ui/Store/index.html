@@ -1,5 +1,5 @@
 <!--
-  The technology platform used for project edm is Eclipse Dirigible (https://www.dirigible.io/).
+  The technology platform used for project codbex-petstore is Eclipse Dirigible (https://www.dirigible.io/).
   All the source code is licensed under the Eclipse Public License - v 2.0 (https://www.eclipse.org/legal/epl-v20.html)
   and maintained at GitHub (https://github.com/eclipse/dirigible).
 -->
@@ -22,7 +22,7 @@
     </head>
 
     <body>
-        <ide-header menu-ext-id="edm-menu"></ide-header>
+        <ide-header menu-ext-id="codbex-petstore-menu"></ide-header>
         <ide-container>
             <ide-layout views-layout-model="layoutModel"></ide-layout>
         </ide-container>
@@ -31,8 +31,8 @@
         <script type="text/javascript">
             angular.module('app', ['ngResource', 'ideLayout', 'ideUI'])
                 .constant('branding', {
-                    name: 'CODBEX - Petstore',
-                    brand: 'Codbex',
+                    name: 'codbex-petstore',
+                    brand: 'CODBEX',
                     brandUrl: 'https://www.codbex.com/',
                     icons: {
                         faviconIco: '/services/web/resources/images/favicon.ico',
@@ -42,9 +42,9 @@
                     logo: '/services/web/resources/images/dirigible.svg',
                 })
                 .constant('extensionPoint', {
-                    perspectives: "edm",
-                    views: "edm-view",
-                    dialogWindows: "edm-dialog-window"
+                    perspectives: "codbex-petstore",
+                    views: "codbex-petstore-view",
+                    dialogWindows: "codbex-petstore-dialog-window"
                 })
                 .controller('ApplicationController', ["$scope", "messageHub", function ($scope, messageHub) {
 

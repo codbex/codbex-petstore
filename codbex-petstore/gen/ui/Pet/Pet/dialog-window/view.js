@@ -6,7 +6,7 @@
 const viewData = {
     id: "Pet-details",
     label: "Pet",
-    link: "/services/web/edm/gen/ui/Pet/Pet/dialog-window/index.html"
+    link: "/services/web/codbex-petstore/gen/ui/Pet/Pet/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

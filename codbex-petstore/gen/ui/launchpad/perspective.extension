@@ -1,1 +1,1 @@
-{"module":"edm/gen/ui/launchpad/perspective.js","extensionPoint":"edm","description":"edm - Application Perspective"}
+{"module":"codbex-petstore/gen/ui/launchpad/perspective.js","extensionPoint":"codbex-petstore","description":"codbex-petstore - Application Perspective"}

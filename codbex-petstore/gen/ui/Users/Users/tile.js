@@ -10,7 +10,7 @@ exports.getTile = function () {
         caption: "Manage Users",
         tooltip: "Users",
         // icon: "file-o",
-        location: "/services/web/edm/gen/ui/Users/index.html",
+        location: "/services/web/codbex-petstore/gen/ui/Users/index.html",
         order: "10",
         groupOrder: "10"
     };

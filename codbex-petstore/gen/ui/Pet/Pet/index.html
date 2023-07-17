@@ -29,9 +29,9 @@
 					<tr fd-table-row>
 						<th fd-table-header-cell>category</th>
 						<th fd-table-header-cell>name</th>
-						<th fd-table-header-cell>photoUrls</th>
-						<th fd-table-header-cell>tags</th>
 						<th fd-table-header-cell>status</th>
+						<th fd-table-header-cell>photoUrlid</th>
+						<th fd-table-header-cell>tagid</th>
 						<th fd-table-header-cell></th>
 					</tr>
 				</thead>
@@ -43,9 +43,9 @@
 						dg-selected="next.id === selectedEntity.id" ng-click="selectEntity(next)">
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.category}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.name}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.photoUrls}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.tags}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.photoUrlid}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.tagid}}</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>
 								<fd-popover-control>

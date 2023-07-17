@@ -1,1 +1,1 @@
-{"module":"edm/gen/ui/Store/Store/dialog-window/view.js","extensionPoint":"edm-dialog-window","description":"edm - Application Dialog Window"}
+{"module":"codbex-petstore/gen/ui/Store/Store/dialog-window/view.js","extensionPoint":"codbex-petstore-dialog-window","description":"codbex-petstore - Application Dialog Window"}

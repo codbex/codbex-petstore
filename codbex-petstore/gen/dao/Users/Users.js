@@ -3,7 +3,7 @@ const producer = require("messaging/producer");
 const daoApi = require("db/dao");
 
 let dao = daoApi.create({
-	table: "CODBEX-petstore_USERS",
+	table: "CODBEX_USERS",
 	properties: [
 		{
 			name: "id",
@@ -66,7 +66,7 @@ exports.get = function(id) {
 exports.create = function(entity) {
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "CODBEX-petstore_USERS",
+		table: "CODBEX_USERS",
 		key: {
 			name: "id",
 			column: "USERS_ID",
@@ -79,7 +79,7 @@ exports.create = function(entity) {
 exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "CODBEX-petstore_USERS",
+		table: "CODBEX_USERS",
 		key: {
 			name: "id",
 			column: "USERS_ID",
@@ -91,7 +91,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "CODBEX-petstore_USERS",
+		table: "CODBEX_USERS",
 		key: {
 			name: "id",
 			column: "USERS_ID",
@@ -105,7 +105,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX-petstore_USERS"');
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_USERS"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
@@ -117,5 +117,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("edm/Users/Users/" + operation).send(JSON.stringify(data));
+	producer.queue("codbex-petstore/Users/Users/" + operation).send(JSON.stringify(data));
 }

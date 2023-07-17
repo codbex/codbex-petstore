@@ -1,4 +1,4 @@
 {
-    "name": "edm-dialog-window",
-    "description": "edm - Extension Point for the Application Dialog Window Providers"
+    "name": "codbex-petstore-dialog-window",
+    "description": "codbex-petstore - Extension Point for the Application Dialog Window Providers"
 }

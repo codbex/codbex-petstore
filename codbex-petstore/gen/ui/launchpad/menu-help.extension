@@ -1,1 +1,1 @@
-{"module":"edm/gen/ui/launchpad/menu-help.js","extensionPoint":"edm-menu","description":"edm - Application Menu"}
+{"module":"codbex-petstore/gen/ui/launchpad/menu-help.js","extensionPoint":"codbex-petstore-menu","description":"codbex-petstore - Application Menu"}

@@ -1,1 +1,1 @@
-{"module":"edm/gen/ui/Pet/Pet/tile.js","extensionPoint":"edm-tile","description":"edm - Application Tile"}
+{"module":"codbex-petstore/gen/ui/Pet/Pet/tile.js","extensionPoint":"codbex-petstore-tile","description":"codbex-petstore - Application Tile"}

@@ -4,11 +4,11 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "edm-home-launchpad",
+    id: "codbex-petstore-home-launchpad",
     label: "Home Launchpad",
     factory: "frame",
     region: "center",
-    link: "/services/web/edm/gen/ui/launchpad/Home/index.html",
+    link: "/services/web/codbex-petstore/gen/ui/launchpad/Home/index.html",
 };
 
 if (typeof exports !== 'undefined') {

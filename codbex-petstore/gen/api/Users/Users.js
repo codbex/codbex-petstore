@@ -1,6 +1,6 @@
 const rs = require("http/rs");
-const dao = require("edm/gen/dao/Users/Users");
-const http = require("edm/gen/api/utils/http");
+const dao = require("codbex-petstore/gen/dao/Users/Users");
+const http = require("codbex-petstore/gen/api/utils/http");
 
 rs.service()
 	.resource("")
@@ -60,7 +60,7 @@ rs.service()
 		.post(function(ctx, request, response) {
 			let entity = request.getJSON();
 			entity.id = dao.create(entity);
-			response.setHeader("Content-Location", "/services/js/edm/gen/api/Users.js/" + entity.id);
+			response.setHeader("Content-Location", "/services/js/codbex-petstore/gen/api/Users.js/" + entity.id);
 			http.sendResponseCreated(entity);
 		})
 		.produces(["application/json"])

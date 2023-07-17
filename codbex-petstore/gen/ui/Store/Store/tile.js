@@ -10,7 +10,7 @@ exports.getTile = function () {
         caption: "Manage Stores",
         tooltip: "Store",
         // icon: "file-o",
-        location: "/services/web/edm/gen/ui/Store/index.html",
+        location: "/services/web/codbex-petstore/gen/ui/Store/index.html",
         order: "100",
         groupOrder: "150"
     };

@@ -8,7 +8,7 @@ const viewData = {
     label: "Pet",
     factory: "frame",
     region: "center",
-    link: "/services/web/edm/gen/ui/Pet/Pet/index.html",
+    link: "/services/web/codbex-petstore/gen/ui/Pet/Pet/index.html",
 };
 
 if (typeof exports !== 'undefined') {

@@ -5,10 +5,10 @@
  */
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'edm.launchpad.Home';
+		messageHubProvider.eventIdPrefix = 'codbex-petstore.launchpad.Home';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/edm/gen/ui/launchpad/Home/tiles.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/ui/launchpad/Home/tiles.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 

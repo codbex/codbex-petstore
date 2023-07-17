@@ -1,4 +1,4 @@
 {
-    "name": "edm-tile",
-    "description": "edm - Extension Point for the Application Tile Providers"
+    "name": "codbex-petstore-tile",
+    "description": "codbex-petstore - Extension Point for the Application Tile Providers"
 }

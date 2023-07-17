@@ -2,7 +2,7 @@
     "schema": {
         "structures": [
             {
-                "name": "CODBEX-petstore_PET",
+                "name": "CODBEX_PET",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -15,13 +15,17 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 20,
+                        "length": 50,
+                        "precision": "NaN",
+                        "scale": "NaN",
                         "nullable": true,
                         "name": "ENTITY1_CATEGORY"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 20,
+                        "precision": "NaN",
+                        "scale": "NaN",
                         "nullable": true,
                         "name": "ENTITY1_NAME"
                     },
@@ -31,24 +35,24 @@
                         "precision": "NaN",
                         "scale": "NaN",
                         "nullable": true,
-                        "name": "ENTITY1_PHOTOURLS"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "ENTITY1_TAGS"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
                         "name": "ENTITY1_STATUS"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "PET_PHOTOURLSID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "nullable": true,
+                        "name": "PET_TAGID"
                     }
                 ]
             },
             {
-                "name": "CODBEX-petstore_STORE",
+                "name": "CODBEX_STORE",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -104,7 +108,7 @@
                 ]
             },
             {
-                "name": "CODBEX-petstore_USERS",
+                "name": "CODBEX_USERS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -172,21 +176,81 @@
                 ]
             },
             {
+                "name": "CODBEX_PHOTOURLS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PHOTOURLS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "precision": "NaN",
+                        "scale": "NaN",
+                        "nullable": true,
+                        "name": "PHOTOURLS_URL"
+                    }
+                ]
+            },
+            {
+                "name": "CODBEX_TAG",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "TAG_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "TAG_TAG"
+                    }
+                ]
+            },
+            {
+                "name": "Pet_photoUrl",
+                "type": "foreignKey",
+                "table": "CODBEX_PET",
+                "constraintName": "Pet_photoUrl",
+                "columns": "PET_PHOTOURLSID",
+                "referencedTable": "CODBEX_PHOTOURLS",
+                "referencedColumns": "PHOTOURLS_ID"
+            },
+            {
+                "name": "Pet_tag",
+                "type": "foreignKey",
+                "table": "CODBEX_PET",
+                "constraintName": "Pet_tag",
+                "columns": "PET_TAGID",
+                "referencedTable": "CODBEX_TAG",
+                "referencedColumns": "TAG_ID"
+            },
+            {
                 "name": "Store_Pet",
                 "type": "foreignKey",
-                "table": "CODBEX-petstore_STORE",
+                "table": "CODBEX_STORE",
                 "constraintName": "Store_Pet",
                 "columns": "STORE_PETID",
-                "referencedTable": "CODBEX-petstore_PET",
+                "referencedTable": "CODBEX_PET",
                 "referencedColumns": "ENTITY1_ID"
             },
             {
                 "name": "Store_Users",
                 "type": "foreignKey",
-                "table": "CODBEX-petstore_STORE",
+                "table": "CODBEX_STORE",
                 "constraintName": "Store_Users",
                 "columns": "STORE_USERID",
-                "referencedTable": "CODBEX-petstore_USERS",
+                "referencedTable": "CODBEX_USERS",
                 "referencedColumns": "USERS_ID"
             }
         ]

@@ -6,7 +6,7 @@
 const perspectiveData = {
 	id: "Users",
 	name: "Users",
-	link: "/services/web/edm/gen/ui/Users/index.html",
+	link: "/services/web/codbex-petstore/gen/ui/Users/index.html",
 	order: "10",
 	icon: "/services/web/resources/unicons/user.svg",
 };

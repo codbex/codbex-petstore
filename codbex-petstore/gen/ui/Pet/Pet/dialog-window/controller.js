@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'edm.Pet.Pet';
+		messageHubProvider.eventIdPrefix = 'codbex-petstore.Pet.Pet';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/edm/gen/api/Pet/Pet.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/api/Pet/Pet.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 
