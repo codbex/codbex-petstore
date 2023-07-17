@@ -11,9 +11,6 @@ let tiles = {};
 let tileExtensions = extensions.getExtensions("codbex-petstore-tile");
 for (let i = 0; tileExtensions !== null && i < tileExtensions.length; i++) {
     let tileExtension = require(tileExtensions[i]);
-    if (typeof tileExtension.getTile !== "function") {
-      continue;
-    }
     let tile = tileExtension.getTile();
     if (!tiles[tile.group]) {
         tiles[tile.group] = [];

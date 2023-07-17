@@ -18,7 +18,7 @@
 
 	<body class="dg-vbox" dg-contextmenu="contextMenuContent">
 		<fd-toolbar has-title="true">
-			<fd-toolbar-title>Items ({{dataCount}})</fd-toolbar-title>
+			<h4>Items ({{dataCount}})</h4>
 			<fd-toolbar-spacer></fd-toolbar-spacer>
 			<fd-button compact="true" dg-type="transparent" dg-label="Create" ng-click="createEntity()"></fd-button>
 		</fd-toolbar>
@@ -43,11 +43,17 @@
 					<tr fd-table-row hoverable="true" ng-repeat="next in data"
 						dg-selected="next.id === selectedEntity.id" ng-click="selectEntity(next)">
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.quantity}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.petId}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.shipDate}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							{{optionspetIdValue(next.petId)}}
+						</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							<fd-input type="date" ng-model="next.shipDate" ng-readonly="true"></fd-input>
+						</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.complete}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.userId}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							{{optionsuserIdValue(next.userId)}}
+						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>
 								<fd-popover-control>

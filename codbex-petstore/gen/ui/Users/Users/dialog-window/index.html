@@ -98,7 +98,7 @@
                                 ng-minlength="0.0 || 0"
                                 ng-maxlength="50.0 || -1"
                                 dg-input-rules="{ patterns: [''] }"
-                                type="text"
+                                type="email"
                                 placeholder="Enter email">
                             </fd-input>
                             <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
@@ -135,8 +135,8 @@
                                 ng-readonly="action === 'select'"
                                 ng-minlength="0.0 || 0"
                                 ng-maxlength="20.0 || -1"
-                                dg-input-rules="{ patterns: [''] }"
-                                type="text"
+                                dg-input-rules="{ patterns:['^[0-9]{0,14}$'] }"
+                                type="tel"
                                 placeholder="Enter phone">
                             </fd-input>
                             <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
@@ -174,7 +174,7 @@
                                 ng-minlength="0.0 || 0"
                                 ng-maxlength="20.0 || -1"
                                 dg-input-rules="{ patterns: [''] }"
-                                type="text"
+                                type="url"
                                 placeholder="Enter profileUrl">
                             </fd-input>
                             <fd-form-message dg-type="error">Incorrect Input</fd-form-message>

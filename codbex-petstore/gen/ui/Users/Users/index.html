@@ -18,7 +18,7 @@
 
 	<body class="dg-vbox" dg-contextmenu="contextMenuContent">
 		<fd-toolbar has-title="true">
-			<fd-toolbar-title>Items ({{dataCount}})</fd-toolbar-title>
+			<h4>Items ({{dataCount}})</h4>
 			<fd-toolbar-spacer></fd-toolbar-spacer>
 			<fd-button compact="true" dg-type="transparent" dg-label="Create" ng-click="createEntity()"></fd-button>
 		</fd-toolbar>
@@ -47,11 +47,17 @@
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.username}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.firstname}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.lastname}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.email}}</td>
+						<td fd-table-cell>
+							<a href="mailto:{{next.email}}" class="fd-link">{{next.email}}</a>
+						</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.password}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.phone}}</td>
+						<td fd-table-cell>
+							<a href="tel:{{next.phone}}" class="fd-link">{{next.phone}}</a>
+						</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.profileUrl}}</td>
+						<td fd-table-cell>
+							<a href="{{next.profileUrl}}" target="_blank" class="fd-link">{{next.profileUrl}}</a>
+						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>
 								<fd-popover-control>

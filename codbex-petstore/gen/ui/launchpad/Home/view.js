@@ -4,7 +4,7 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "codbex-petstore-home-launchpad",
+    id: "home-launchpad",
     label: "Home Launchpad",
     factory: "frame",
     region: "center",

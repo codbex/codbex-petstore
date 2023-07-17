@@ -5,13 +5,6 @@
  */
 
 const defaultMenuItems = [
-	{
-        label: "Applications Portal",
-        action: "open",
-        order: 1,
-        data: "/services/web/portal/",
-        divider: false
-    },
     {
         label: "Help Portal",
         action: "open",

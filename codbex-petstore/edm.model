@@ -68,42 +68,6 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "50",
                         "widgetType": "TEXTBOX"
-                    },
-                    {
-                        "calculatedPropertyExpression": "",
-                        "dataAutoIncrement": "false",
-                        "dataLength": "0",
-                        "dataName": "PET_PHOTOURLSID",
-                        "dataNullable": "true",
-                        "dataPrimaryKey": "false",
-                        "dataType": "INTEGER",
-                        "dataUnique": "false",
-                        "isCalculatedProperty": "false",
-                        "name": "photoUrlid",
-                        "widgetIsMajor": "true",
-                        "widgetLength": "20",
-                        "widgetType": "TEXTBOX",
-                        "relationshipName": "Pet_photoUrl",
-                        "relationshipEntityName": "photoUrl",
-                        "relationshipEntityPerspectiveName": "entities"
-                    },
-                    {
-                        "calculatedPropertyExpression": "",
-                        "dataAutoIncrement": "false",
-                        "dataLength": "0",
-                        "dataName": "PET_TAGID",
-                        "dataNullable": "true",
-                        "dataPrimaryKey": "false",
-                        "dataType": "INTEGER",
-                        "dataUnique": "false",
-                        "isCalculatedProperty": "false",
-                        "name": "tagid",
-                        "widgetIsMajor": "true",
-                        "widgetLength": "20",
-                        "widgetType": "TEXTBOX",
-                        "relationshipName": "Pet_tag",
-                        "relationshipEntityName": "tag",
-                        "relationshipEntityPerspectiveName": "entities"
                     }
                 ],
                 "caption": "Manage Pets",
@@ -118,7 +82,6 @@
                 "menuKey": "pets",
                 "menuLabel": "Pets",
                 "name": "Pet",
-                "navigationPath": "pet",
                 "perspectiveIcon": "/services/web/resources/unicons/wind-moon.svg",
                 "perspectiveName": "Pet",
                 "perspectiveOrder": "50",
@@ -157,7 +120,7 @@
                         "isCalculatedProperty": "false",
                         "name": "quantity",
                         "widgetIsMajor": "true",
-                        "widgetLength": "",
+                        "widgetLength": "20",
                         "widgetType": "TEXTBOX"
                     },
                     {
@@ -166,14 +129,18 @@
                         "dataLength": "0",
                         "dataName": "STORE_PETID",
                         "dataNullable": "true",
+                        "dataPrecision": "NaN",
                         "dataPrimaryKey": "false",
+                        "dataScale": "NaN",
                         "dataType": "INTEGER",
                         "dataUnique": "false",
                         "isCalculatedProperty": "false",
                         "name": "petId",
+                        "widgetDropDownKey": "id",
+                        "widgetDropDownValue": "name",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
-                        "widgetType": "TEXTBOX",
+                        "widgetType": "DROPDOWN",
                         "relationshipName": "Store_Pet",
                         "relationshipEntityName": "Pet",
                         "relationshipEntityPerspectiveName": "Pet"
@@ -193,7 +160,7 @@
                         "name": "shipDate",
                         "widgetIsMajor": "true",
                         "widgetLength": "NaN",
-                        "widgetType": "TEXTBOX"
+                        "widgetType": "DATE"
                     },
                     {
                         "calculatedPropertyExpression": "",
@@ -224,7 +191,7 @@
                         "isCalculatedProperty": "false",
                         "name": "complete",
                         "widgetIsMajor": "true",
-                        "widgetLength": "",
+                        "widgetLength": "20",
                         "widgetType": "TEXTBOX"
                     },
                     {
@@ -233,14 +200,18 @@
                         "dataLength": "0",
                         "dataName": "STORE_USERID",
                         "dataNullable": "true",
+                        "dataPrecision": "NaN",
                         "dataPrimaryKey": "false",
+                        "dataScale": "NaN",
                         "dataType": "INTEGER",
                         "dataUnique": "false",
                         "isCalculatedProperty": "false",
                         "name": "userId",
+                        "widgetDropDownKey": "id",
+                        "widgetDropDownValue": "username",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
-                        "widgetType": "TEXTBOX",
+                        "widgetType": "DROPDOWN",
                         "relationshipName": "Store_Users",
                         "relationshipEntityName": "Users",
                         "relationshipEntityPerspectiveName": "Users"
@@ -258,7 +229,6 @@
                 "menuKey": "store",
                 "menuLabel": "Store",
                 "name": "Store",
-                "navigationPath": "store",
                 "perspectiveIcon": "/services/web/resources/unicons/shop.svg",
                 "perspectiveName": "Store",
                 "perspectiveOrder": "150",
@@ -343,7 +313,7 @@
                         "name": "email",
                         "widgetIsMajor": "true",
                         "widgetLength": "50",
-                        "widgetType": "TEXTBOX"
+                        "widgetType": "EMAIL"
                     },
                     {
                         "calculatedPropertyExpression": "",
@@ -368,14 +338,16 @@
                         "dataLength": "20",
                         "dataName": "USERS_PHONE",
                         "dataNullable": "true",
+                        "dataPrecision": "NaN",
                         "dataPrimaryKey": "false",
+                        "dataScale": "NaN",
                         "dataType": "VARCHAR",
                         "dataUnique": "false",
                         "isCalculatedProperty": "false",
                         "name": "phone",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
-                        "widgetType": "TEXTBOX"
+                        "widgetType": "TEL"
                     },
                     {
                         "calculatedPropertyExpression": "",
@@ -407,7 +379,7 @@
                         "name": "profileUrl",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
-                        "widgetType": "TEXTBOX"
+                        "widgetType": "URL"
                     }
                 ],
                 "caption": "Manage Users",
@@ -422,7 +394,6 @@
                 "menuKey": "users",
                 "menuLabel": "Users",
                 "name": "Users",
-                "navigationPath": "user",
                 "perspectiveIcon": "/services/web/resources/unicons/user.svg",
                 "perspectiveName": "Users",
                 "perspectiveOrder": "10",
@@ -462,7 +433,29 @@
                         "name": "url",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
-                        "widgetType": "TEXTBOX"
+                        "widgetType": "URL"
+                    },
+                    {
+                        "calculatedPropertyExpression": "",
+                        "dataAutoIncrement": "false",
+                        "dataLength": "0",
+                        "dataName": "PHOTOURLS_PETID",
+                        "dataNullable": "true",
+                        "dataPrecision": "NaN",
+                        "dataPrimaryKey": "false",
+                        "dataScale": "NaN",
+                        "dataType": "INTEGER",
+                        "dataUnique": "false",
+                        "isCalculatedProperty": "false",
+                        "name": "Petid",
+                        "widgetDropDownKey": "id",
+                        "widgetDropDownValue": "name",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetType": "DROPDOWN",
+                        "relationshipName": "photoUrl_Pet",
+                        "relationshipEntityName": "Pet",
+                        "relationshipEntityPerspectiveName": "Pet"
                     }
                 ],
                 "caption": "Manage entity photoUrls",
@@ -470,14 +463,13 @@
                 "dataName": "PHOTOURLS",
                 "dataQuery": "",
                 "icon": "/services/web/resources/unicons/file.svg",
-                "layoutType": "MANAGE",
+                "layoutType": "REPORT_TABLE",
                 "menuIndex": "100",
                 "menuKey": "photourls",
                 "menuLabel": "photoUrls",
                 "name": "photoUrl",
-                "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-                "perspectiveName": "entities",
+                "perspectiveName": "Entities",
                 "perspectiveOrder": "100",
                 "title": "photoUrls",
                 "tooltip": "photoUrls",
@@ -514,6 +506,28 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "TEXTBOX"
+                    },
+                    {
+                        "calculatedPropertyExpression": "",
+                        "dataAutoIncrement": "false",
+                        "dataLength": "0",
+                        "dataName": "TAG_PETID",
+                        "dataNullable": "true",
+                        "dataPrecision": "NaN",
+                        "dataPrimaryKey": "false",
+                        "dataScale": "NaN",
+                        "dataType": "INTEGER",
+                        "dataUnique": "false",
+                        "isCalculatedProperty": "false",
+                        "name": "Petid",
+                        "widgetDropDownKey": "id",
+                        "widgetDropDownValue": "name",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetType": "DROPDOWN",
+                        "relationshipName": "tag_Pet",
+                        "relationshipEntityName": "Pet",
+                        "relationshipEntityPerspectiveName": "Pet"
                     }
                 ],
                 "caption": "Manage entity tag",
@@ -521,14 +535,13 @@
                 "dataName": "TAG",
                 "dataQuery": "",
                 "icon": "/services/web/resources/unicons/file.svg",
-                "layoutType": "MANAGE",
+                "layoutType": "REPORT_PIE",
                 "menuIndex": "100",
                 "menuKey": "tag",
                 "menuLabel": "tag",
                 "name": "tag",
-                "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
-                "perspectiveName": "entities",
+                "perspectiveName": "Entities",
                 "perspectiveOrder": "100",
                 "title": "tag",
                 "tooltip": "tag",
@@ -555,25 +568,6 @@
                 "order": "50"
             }
         ],
-        "navigations": [
-            {
-                "path": "user",
-                "label": "user",
-                "icon": "/services/web/resources/unicons/user.svg",
-                "url": {}
-            },
-            {
-                "path": "pet",
-                "label": "pet",
-                "icon": "/services/web/resources/unicons/wind-moon.svg",
-                "url": {}
-            },
-            {
-                "path": "store",
-                "label": "store",
-                "icon": "/services/web/resources/unicons/shop.svg",
-                "url": {}
-            }
-        ]
+        "sidebar": []
     }
 }

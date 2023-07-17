@@ -1,5 +1,5 @@
 const rs = require("http/rs");
-const dao = require("codbex-petstore/gen/dao/entities/tag");
+const dao = require("codbex-petstore/gen/dao/Entities/tag");
 const http = require("codbex-petstore/gen/api/utils/http");
 
 rs.service()

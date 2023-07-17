@@ -85,44 +85,6 @@
                             <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
                         </fd-form-input-message-group>
                     </fd-form-item>
-                    <fd-form-item horizontal="false">
-                        <fd-form-label for="idphotoUrlid" dg-required="false" dg-colon="true">photoUrlid</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.photoUrlid ? false : true }}">
-                            <fd-input id="idphotoUrlid"
-                                name="photoUrlid"
-                                state="{{ formErrors.photoUrlid ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['photoUrlid'].$valid, 'photoUrlid')"
-                                ng-model="entity.photoUrlid"
-                                ng-readonly="action === 'select'"
-                                ng-minlength="${property.minLength} || 0"
-                                ng-maxlength="${property.maxLength} || -1"
-                                dg-input-rules="{ patterns: [''] }"
-                                type="text"
-                                placeholder="Enter photoUrlid">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
-                    </fd-form-item>
-                    <fd-form-item horizontal="false">
-                        <fd-form-label for="idtagid" dg-required="false" dg-colon="true">tagid</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.tagid ? false : true }}">
-                            <fd-input id="idtagid"
-                                name="tagid"
-                                state="{{ formErrors.tagid ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['tagid'].$valid, 'tagid')"
-                                ng-model="entity.tagid"
-                                ng-readonly="action === 'select'"
-                                ng-minlength="${property.minLength} || 0"
-                                ng-maxlength="${property.maxLength} || -1"
-                                dg-input-rules="{ patterns: [''] }"
-                                type="text"
-                                placeholder="Enter tagid">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
-                    </fd-form-item>
             </fd-fieldset>
         </fd-scrollbar>
 

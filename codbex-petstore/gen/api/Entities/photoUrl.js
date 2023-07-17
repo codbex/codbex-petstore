@@ -1,5 +1,5 @@
 const rs = require("http/rs");
-const dao = require("codbex-petstore/gen/dao/entities/photoUrl");
+const dao = require("codbex-petstore/gen/dao/Entities/photoUrl");
 const http = require("codbex-petstore/gen/api/utils/http");
 
 rs.service()

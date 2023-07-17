@@ -5,7 +5,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["entityApiProvider", function (entityApiProvider) {
 		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/api/Store/Store.js";
 	}])
-	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
+	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', function ($scope, $http, messageHub, entityApi) {
 
 		function resetPagination() {
 			$scope.dataPage = 1;
@@ -61,6 +61,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Store-details", {
 				action: "select",
 				entity: entity,
+				optionspetId: $scope.optionspetId,
+				optionsuserId: $scope.optionsuserId,
 			});
 		};
 
@@ -69,6 +71,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Store-details", {
 				action: "create",
 				entity: {},
+				optionspetId: $scope.optionspetId,
+				optionsuserId: $scope.optionsuserId,
 			}, null, false);
 		};
 
@@ -76,6 +80,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Store-details", {
 				action: "update",
 				entity: entity,
+				optionspetId: $scope.optionspetId,
+				optionsuserId: $scope.optionsuserId,
 			}, null, false);
 		};
 
@@ -107,5 +113,44 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 			});
 		};
+
+		//----------------Dropdowns-----------------//
+		$scope.optionspetId = [];
+		$scope.optionsuserId = [];
+
+		$http.get("/services/js/codbex-petstore/gen/api/Pet/Pet.js").then(function (response) {
+			$scope.optionspetId = response.data.map(e => {
+				return {
+					value: e.id,
+					text: e.name
+				}
+			});
+		});
+
+		$http.get("/services/js/codbex-petstore/gen/api/Users/Users.js").then(function (response) {
+			$scope.optionsuserId = response.data.map(e => {
+				return {
+					value: e.id,
+					text: e.username
+				}
+			});
+		});
+		$scope.optionspetIdValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionspetId.length; i++) {
+				if ($scope.optionspetId[i].value === optionKey) {
+					return $scope.optionspetId[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionsuserIdValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsuserId.length; i++) {
+				if ($scope.optionsuserId[i].value === optionKey) {
+					return $scope.optionsuserId[i].text;
+				}
+			}
+			return null;
+		};
+		//----------------Dropdowns-----------------//
 
 	}]);
