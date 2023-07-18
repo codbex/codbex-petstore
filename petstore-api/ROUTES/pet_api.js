@@ -7,25 +7,28 @@ class PetApi {
 
     @Post("/pet/:petId/uploadImage")
     uploadImage(req, res, _ctx) {
-        try {
-            ["id", "imageUrl"].forEach(elem => {
-                if (!req.params.hasOwnProperty(elem)) {
-                    res.sendStatus(BAD_REQUEST)
-                }
-            })
+      try {
+        ["id", "imageUrl"].forEach(elem => {
+          if (!req.params.hasOwnProperty(elem)) {
+            res.sendStatus(BAD_REQUEST);
+            return;
+          }
+        });
 
-            if (!daoPet.find(reg.params.id)) {
-                res.sendStatus(NOT_FOUND)
-            }
-
-            daoImg.create(reg.params.id, req.params)
-
+        if (!daoPet.find(req.params.id)) {
+          res.sendStatus(NOT_FOUND);
+          return;
         }
 
-        catch (e) {
-            res.println(e);
-        }
+        daoImg.create(req.params.id, req.params.imageUrl);
+        res.sendStatus(OK);
+      } 
+
+      catch (e) {
+        res.println(e);
+      }
     }
+
 
     @Post("/pet")
     addPet(_req, _res, _ctx) {
