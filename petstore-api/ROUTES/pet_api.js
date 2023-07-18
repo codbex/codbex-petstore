@@ -1,6 +1,6 @@
 //              TODOS
 //------------------------------------------
-// TODO: add validation exception
+// TODO: add validation exception in all methods
 // TODO: does the find by status loop work
 
 
@@ -122,9 +122,28 @@ class PetApi {
 
 
     @Get("/pet/:petid")
-    findPetById(_req, _res, _ctx) {
+    findPetById(req, res, _ctx) {
+      try {
+        if (!req.params.hasOwnProperty("id")) {
+          res.sendStatus(BAD_REQUEST);
+          return;
+        }
 
+        const pet = daoPet.find(req.params.id);
+
+        if (!pet) {
+          res.sendStatus(NOT_FOUND);
+          return;
+        }
+
+        res.status(200).json(pet);
+      } 
+
+      catch (e) {
+        res.println(e);
+      }
     }
+
 
     @Post("/pet/:petid")
     updatePetById(_req, _res, _ctx) {
