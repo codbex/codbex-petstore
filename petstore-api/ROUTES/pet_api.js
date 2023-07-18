@@ -1,3 +1,9 @@
+//              TODOS
+//------------------------------------------
+// TODO: add validation exception
+// TODO: does the find by status loop work
+
+
 const { Controller, Get, Post, Put, Delete } = require("http/v4/rs/decorators");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
 const daoImg = require("codbex-petstore/gen/dao/Entities/Entities.js");
@@ -76,8 +82,6 @@ class PetApi {
 
         delete updateData.id;
 
-        // TODO: add validation exception
-
         const updatedPet = daoPet.update(petId, updateData);
 
         if (!updatedPet) {
@@ -95,9 +99,27 @@ class PetApi {
 
 
     @Get("/pet/findByStatus")
-    findPetsByStatus(_req, _res, _ctx) {
+    findPetsByStatus(req, res, _ctx) {
+      try {
+        if (!req.query.hasOwnProperty("status")) {
+          res.sendStatus(BAD_REQUEST);
+          return;
+        }
 
+        const status = req.params.status;
+
+        const allPets = daoPet.list();
+
+        const petsWithStatus = allPets.filter(pet => pet.status === status);
+
+        res.status(200).json(petsWithStatus);
+      } 
+
+      catch (e) {
+        res.println(e);
+      }
     }
+
 
     @Get("/pet/:petid")
     findPetById(_req, _res, _ctx) {
