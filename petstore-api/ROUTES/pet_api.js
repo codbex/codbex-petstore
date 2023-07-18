@@ -13,7 +13,7 @@ class PetApi {
             res.sendStatus(BAD_REQUEST);
             return;
           }
-        });
+        })
 
         if (!daoPet.find(req.params.id)) {
           res.sendStatus(NOT_FOUND);
@@ -33,24 +33,29 @@ class PetApi {
     @Post("/pet")
     addPet(req, res, _ctx) {
       try {
-        const petData = req.body;
+        ["name", "category", "status"].forEach(elem => {
+          if (!req.params.hasOwnProperty(elem)) {
+            res.sendStatus(BAD_REQUEST);
+            return;
+          }
+        })
 
-        // Validate required fields
-        if (!petData || !petData.name || !petData.category || !petData.status) {
-          res.sendStatus(BAD_REQUEST);
-          return;
-        }
+        const petData = {
+          name: req.params.name,
+          category: req.params.category,
+          status: req.params.status
+        };
 
-        // Add the pet using daoPet.create
         const newPet = daoPet.create(petData);
 
-        // Check if the pet was created successfully
         if (!newPet) {
           throw new Error("Failed to create pet");
         }
 
         res.status(201).json(newPet);
-      } catch (e) {
+      } 
+
+      catch (e) {
         res.println(e);
       }
     }
