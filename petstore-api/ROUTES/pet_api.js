@@ -62,9 +62,33 @@ class PetApi {
 
 
     @Put("/pet")
-    updatePet(_req, _res, _ctx) {
+    updatePet(req, res, _ctx) {
+      try {
+        ["id", "name", "category", "status"].forEach(elem => {
+          if (!req.params.hasOwnProperty(elem)) {
+            res.sendStatus(BAD_REQUEST);
+            return;
+          }
+        })
 
+        const petId = req.params.id;
+        const updateData = req.params;
+
+        delete updateData.id;
+
+        const updatedPet = daoPet.update(petId, updateData);
+
+        if (!updatedPet) {
+          res.sendStatus(NOT_FOUND);
+          return;
+        }
+
+        res.status(200).json(updatedPet);
+      } catch (e) {
+        res.println(e);
+      }
     }
+
 
     @Get("/pet/findByStatus")
     findPetsByStatus(_req, _res, _ctx) {
