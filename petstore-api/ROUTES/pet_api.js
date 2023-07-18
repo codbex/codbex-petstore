@@ -76,6 +76,8 @@ class PetApi {
 
         delete updateData.id;
 
+        // TODO: add validation exception
+
         const updatedPet = daoPet.update(petId, updateData);
 
         if (!updatedPet) {
@@ -84,7 +86,9 @@ class PetApi {
         }
 
         res.status(200).json(updatedPet);
-      } catch (e) {
+      } 
+
+      catch (e) {
         res.println(e);
       }
     }
