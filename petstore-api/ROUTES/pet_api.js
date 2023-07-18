@@ -2,6 +2,7 @@
 //------------------------------------------
 // TODO: add validation exception in all methods
 // TODO: does the find by status loop work
+// TODO: research whats the diferance between the two update methods
 
 
 const { Controller, Get, Post, Put, Delete } = require("http/v4/rs/decorators");
@@ -147,6 +148,8 @@ class PetApi {
 
     @Post("/pet/:petid")
     updatePetById(_req, _res, _ctx) {
+
+    //  whats the differance
 
     }
 
