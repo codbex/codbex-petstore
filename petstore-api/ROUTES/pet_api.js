@@ -31,9 +31,30 @@ class PetApi {
 
 
     @Post("/pet")
-    addPet(_req, _res, _ctx) {
+    addPet(req, res, _ctx) {
+      try {
+        const petData = req.body;
 
+        // Validate required fields
+        if (!petData || !petData.name || !petData.category || !petData.status) {
+          res.sendStatus(BAD_REQUEST);
+          return;
+        }
+
+        // Add the pet using daoPet.create
+        const newPet = daoPet.create(petData);
+
+        // Check if the pet was created successfully
+        if (!newPet) {
+          throw new Error("Failed to create pet");
+        }
+
+        res.status(201).json(newPet);
+      } catch (e) {
+        res.println(e);
+      }
     }
+
 
     @Put("/pet")
     updatePet(_req, _res, _ctx) {
