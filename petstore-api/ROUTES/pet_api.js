@@ -161,14 +161,9 @@ class PetApi {
           return;
         }
 
-        if (!isValidPetId(req.params.id)) {
-          res.status(400).json({ error: "Invalid pet ID" });
-          return;
-        }
+        daoPet.delete(req.params.id);
 
-        const deletedPet = daoPet.delete(req.params.id);
-
-        if (!deletedPet) {
+        if (daoPet.get(req.params.id)) {
           res.sendStatus(NOT_FOUND);
           return;
         }
