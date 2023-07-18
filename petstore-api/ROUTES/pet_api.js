@@ -102,7 +102,7 @@ class PetApi {
     @Get("/pet/findByStatus")
     findPetsByStatus(req, res, _ctx) {
       try {
-        if (!req.query.hasOwnProperty("status")) {
+        if (!req.params.hasOwnProperty("status")) {
           res.sendStatus(BAD_REQUEST);
           return;
         }
@@ -154,8 +154,32 @@ class PetApi {
     }
 
     @Delete("/pet/:petid")
-    deletePetById(_req, _res, _ctx) {
+    deletePetById(req, res, _ctx) {
+      try {
+        if (!req.params.hasOwnProperty("id")) {
+          res.sendStatus(BAD_REQUEST);
+          return;
+        }
 
+        if (!isValidPetId(req.params.id)) {
+          res.status(400).json({ error: "Invalid pet ID" });
+          return;
+        }
+
+        const deletedPet = daoPet.delete(req.params.id);
+
+        if (!deletedPet) {
+          res.sendStatus(NOT_FOUND);
+          return;
+        }
+
+        res.sendStatus(204);
+      } 
+
+      catch (e) {
+        res.println(e);
+      }
     }
+
 
 }
