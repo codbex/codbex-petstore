@@ -230,7 +230,7 @@ class PetApi {
           return;
         }
 
-        const pet = daoPet.get(body.id);
+        const pet = daoPet.get(ctx.req.params.id);
 
         if (!pet) {
           ctx.res.sendStatus(NOT_FOUND);
