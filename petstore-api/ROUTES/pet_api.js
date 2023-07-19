@@ -136,110 +136,108 @@ class PetApi {
     @Put("/pet")
     updatePet(body, ctx) {
       try {
-        ["id", "name", "category", "status"].forEach(elem => {
-          if (!req.params.hasOwnProperty(elem)) {
-            res.sendStatus(BAD_REQUEST);
+        ["id", "name", "category", "status", "imageUrl", "tags"].forEach(elem => {
+          if (!body.hasOwnProperty(elem)) {
+            ctx.res.sendStatus(BAD_REQUEST);
             return;
           }
         })
 
-        const petId = req.params.id;
-        const updateData = req.params;
+        const petId = body.id;
+        const updateData = body;
 
         delete updateData.id;
-
-        // 
 
         const updatedPet = daoPet.update(petId, updateData);
 
         if (!updatedPet) {
-          res.sendStatus(NOT_FOUND);
+          ctx.res.sendStatus(NOT_FOUND);
           return;
         }
 
-        res.status(200).json(updatedPet);
+        ctx.res.status(200).json(updatedPet);
       } 
 
       catch (e) {
-        res.println(e);
+        ctx.res.println(e);
       }
     }
 
 
     @Get("/pet/findByStatus")
-    findPetsByStatus(req, res, _ctx) {
+    findPetsByStatus(body, ctx) {
       try {
-        if (!req.params.hasOwnProperty("status")) {
-          res.sendStatus(BAD_REQUEST);
+        if (!body.hasOwnProperty("status")) {
+          ctx.res.sendStatus(BAD_REQUEST);
           return;
         }
 
-        const status = req.params.status;
+        const status = body.status;
 
         const allPets = daoPet.list();
 
         const petsWithStatus = allPets.filter(pet => pet.status === status);
 
-        res.status(200).json(petsWithStatus);
+        ctx.res.status(200).json(petsWithStatus);
       } 
 
       catch (e) {
-        res.println(e);
+        ctx.res.println(e);
       }
     }
 
 
     @Get("/pet/:petid")
-    findPetById(req, res, _ctx) {
+    findPetById(body, ctx) {
       try {
-        if (!req.params.hasOwnProperty("id")) {
-          res.sendStatus(BAD_REQUEST);
+        if (!body.hasOwnProperty("id")) {
+          ctx.res.sendStatus(BAD_REQUEST);
           return;
         }
 
-        const pet = daoPet.get(req.params.id);
+        const pet = daoPet.get(body.id);
 
         if (!pet) {
-          res.sendStatus(NOT_FOUND);
+          ctx.res.sendStatus(NOT_FOUND);
           return;
         }
 
-        res.status(200).json(pet);
+        ctx.res.status(200).json(pet);
       } 
 
       catch (e) {
-        res.println(e);
+        ctx.res.println(e);
       }
     }
 
 
     @Post("/pet/:petid")
-    updatePetById(_req, _res, _ctx) {
+    updatePetById(body, ctx) {
 
     //  whats the differance
 
     }
 
     @Delete("/pet/:petid")
-    deletePetById(req, res, _ctx) {
+    deletePetById(body, ctx) {
       try {
-        if (!req.params.hasOwnProperty("id")) {
-          res.sendStatus(BAD_REQUEST);
+        if (!body.hasOwnProperty("id")) {
+          ctx.res.sendStatus(BAD_REQUEST);
           return;
         }
 
-        daoPet.delete(req.params.id);
+        daoPet.delete(body.id);
 
-        if (daoPet.get(req.params.id)) {
-          res.sendStatus(NOT_FOUND);
+        if (daoPet.get(body.id)) {
+          ctx.res.sendStatus(NOT_FOUND);
           return;
         }
 
-        res.sendStatus(204);
-      } 
+        ctx.res.sendStatus(204);
+      }
 
       catch (e) {
-        res.println(e);
+        ctx.res.println(e);
       }
     }
 
