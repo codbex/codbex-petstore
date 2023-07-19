@@ -93,11 +93,6 @@ class PetApi {
           }
         })
 
-        if(!isValidUrl(body.imageUrl)){
-            ctx.res.sendStatus(400);
-            return;
-        }
-
         if(!petCategories.includes(category)){
             ctx.res.sendStatus(400);
             return;
@@ -114,17 +109,32 @@ class PetApi {
           throw new Error("Failed to create pet");
         }
 
-        res.status(201).json(newPet);
+        body.imageUrl.forEach((url) => {
+            if(!isValidUrl(url)){
+                ctx.res.sendStatus(400);
+                return;
+            }
+
+            else{
+                daoImg.create(newPet.id, url);
+            }
+        });
+
+        body.tags.forEach((tag) => {
+            daoTag.create(newPet.id, tag);
+        });
+
+        ctx.res.status(201).json(newPet);
       } 
 
       catch (e) {
-        res.println(e);
+        ctx.res.println(e);
       }
     }
 
 
     @Put("/pet")
-    updatePet(req, res, _ctx) {
+    updatePet(body, ctx) {
       try {
         ["id", "name", "category", "status"].forEach(elem => {
           if (!req.params.hasOwnProperty(elem)) {
