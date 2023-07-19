@@ -93,12 +93,12 @@ class PetApi {
           }
         })
 
-        if(!petCategories.includes(category)){
+        if(!petCategories.includes(body.category)){
             ctx.res.sendStatus(400);
             return;
         }
 
-        if(!petStatus.includes(status)){
+        if(!petStatus.includes(body.status)){
             ctx.res.sendStatus(400);
             return;
         }
@@ -148,12 +148,47 @@ class PetApi {
 
         delete updateData.id;
 
+        const pet = daoPet.get(body.id);
+
+        if(!petCategories.includes(body.category)){
+            ctx.res.sendStatus(400);
+            return;
+        }
+
+        if(!petStatus.includes(body.status)){
+            ctx.res.sendStatus(400);
+            return;
+        }
+
+        body.imageUrl.forEach((url) => {
+            daoImg.delete(url.id);
+        })
+
+        body.tags.forEach((tag) => {
+            daoTag.delete(tag.id);
+        })
+
         const updatedPet = daoPet.update(petId, updateData);
 
         if (!updatedPet) {
           ctx.res.sendStatus(NOT_FOUND);
           return;
         }
+
+        body.imageUrl.forEach((url) => {
+            if(!isValidUrl(url)){
+                ctx.res.sendStatus(400);
+                return;
+            }
+
+            else{
+                daoImg.create(updatedPet.id, url);
+            }
+        });
+
+        body.tags.forEach((tag) => {
+            daoTag.create(newPet.id, tag);
+        });
 
         ctx.res.status(200).json(updatedPet);
       } 
