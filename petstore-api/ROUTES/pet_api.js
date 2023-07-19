@@ -207,6 +207,11 @@ class PetApi {
           return;
         }
 
+        if(!petStatus.includes(body.status)){
+            ctx.res.sendStatus(400);
+            return;
+        }
+
         const status = body.status;
 
         const allPets = daoPet.list();
