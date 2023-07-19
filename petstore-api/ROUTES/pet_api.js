@@ -1,8 +1,3 @@
-//              TODOS
-//------------------------------------------
-// TODO: add validation exception in all methods
-// TODO: research whats the diferance between the two update methods
-
 const petCategories = [
   'Dog',
   'Cat',
