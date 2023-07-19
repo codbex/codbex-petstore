@@ -3,7 +3,7 @@
 // TODO: add validation exception in all methods
 // TODO: research whats the diferance between the two update methods
 
-const petStorePets = [
+const petCategories = [
   'Dog',
   'Cat',
   'Parakeet',
@@ -84,20 +84,29 @@ class PetApi {
 
 
     @Post("/pet")
-    addPet(req, res, _ctx) {
+    addPet(body, ctx) {
       try {
-        ["name", "category", "status"].forEach(elem => {
-          if (!req.params.hasOwnProperty(elem)) {
-            res.sendStatus(BAD_REQUEST);
+        ["name", "category", "status", "imageUrl", "tags"].forEach(elem => {
+          if (!body.hasOwnProperty(elem)) {
+            ctx.res.sendStatus(BAD_REQUEST);
             return;
           }
         })
 
-        const petData = {
-          name: req.params.name,
-          category: req.params.category,
-          status: req.params.status
-        };
+        if(!isValidUrl(body.imageUrl)){
+            ctx.res.sendStatus(400);
+            return;
+        }
+
+        if(!petCategories.includes(category)){
+            ctx.res.sendStatus(400);
+            return;
+        }
+
+        if(!petStatus.includes(status)){
+            ctx.res.sendStatus(400);
+            return;
+        }
 
         const newPet = daoPet.create(petData);
 
