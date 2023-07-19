@@ -1,38 +1,84 @@
 //              TODOS
 //------------------------------------------
 // TODO: add validation exception in all methods
-// TODO: does the find by status loop work
 // TODO: research whats the diferance between the two update methods
+
+const petStorePets = [
+  'Dog',
+  'Cat',
+  'Parakeet',
+  'Canary',
+  'Fish',
+  'Hamster',
+  'Guinea Pig',
+  'Rabbit',
+  'Snake',
+  'Turtle',
+  'Lizard',
+  'Gecko',
+  'Ferret',
+  'Mouse',
+  'Rat',
+  'Hedgehog',
+  'Gerbil',
+  'Chinchilla',
+  'Tarantula',
+  'Hermit Crab'
+];
+
+const petStatus = [
+    'available',
+    'pending',
+    'sold'
+]
+
+function isValidUrl(urlString) {
+    var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+        '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+
+    return !!urlPattern.test(urlString);
+}
+
 
 
 const { Controller, Get, Post, Put, Delete } = require("http/v4/rs/decorators");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
-const daoImg = require("codbex-petstore/gen/dao/Entities/Entities.js");
+const daoImg = require("codbex-petstore/gen/dao/Entities/photoUrl.js");
+const daoTag = require("codbex-petstore/gen/dao/Entities/tag.js");
 
 @Controller
 class PetApi {
 
     @Post("/pet/:petId/uploadImage")
-    uploadImage(req, res, _ctx) {
+    uploadImage(body, ctx) {
       try {
         ["id", "imageUrl"].forEach(elem => {
-          if (!req.params.hasOwnProperty(elem)) {
-            res.sendStatus(BAD_REQUEST);
+          if (!body.hasOwnProperty(elem)) {
+            ctx.res.sendStatus(BAD_REQUEST);
             return;
           }
         })
 
-        if (!daoPet.find(req.params.id)) {
-          res.sendStatus(NOT_FOUND);
+        if (!daoPet.find(body.id)) {
+          ctx.res.sendStatus(NOT_FOUND);
           return;
         }
 
-        daoImg.create(req.params.id, req.params.imageUrl);
-        res.sendStatus(OK);
+        if(!isValidUrl(body.imageUrl)){
+            ctx.res.sendStatus(400);
+            return;
+        }
+
+        daoImg.create(body.id, body.imageUrl);
+        ctx.res.sendStatus(OK);
       } 
 
       catch (e) {
-        res.println(e);
+        ctx.res.println(e);
       }
     }
 
@@ -82,6 +128,8 @@ class PetApi {
         const updateData = req.params;
 
         delete updateData.id;
+
+        // 
 
         const updatedPet = daoPet.update(petId, updateData);
 
