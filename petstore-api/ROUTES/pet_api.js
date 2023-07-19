@@ -254,7 +254,32 @@ class PetApi {
     @Post("/pet/:petid")
     updatePetById(body, ctx) {
 
-    //  whats the differance
+        try{
+            ["id", "name", "status"].forEach(elem => {
+              if (!body.hasOwnProperty(elem)) {
+                ctx.res.sendStatus(BAD_REQUEST);
+                return;
+              }
+            });
+
+            if(!petStatus.includes(body.status)){
+                ctx.res.sendStatus(400);
+                return;
+            }
+
+            const updatedPet = daoPet.update(body);
+
+            if (!updatedPet) {
+              ctx.res.sendStatus(NOT_FOUND);
+              return;
+            }
+
+            ctx.res.status(200).json(updatedPet);
+        }
+
+        catch (e) {
+            ctx.res.println(e);
+        }
 
     }
 
