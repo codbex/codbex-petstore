@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "table": "CODBEX_PET_CATEGORY",
+      "schema": "PUBLIC",
+      "file": "/codbex-petstore-data/data/pet_category.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true,
+      "version": ""
+    },
+    {
+      "table": "CODBEX_USER_STATUS",
+      "schema": "PUBLIC",
+      "file": "/codbex-petstore-data/data/user_status.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true,
+      "version": ""
+    },
+    {
+      "table": "CODBEX_PET_STATUS",
+      "schema": "PUBLIC",
+      "file": "/codbex-petstore-data/data/pet_status.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true,
+      "version": ""
+    }
+  ]
+}
