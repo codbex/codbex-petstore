@@ -2,7 +2,7 @@
     "schema": {
         "structures": [
             {
-                "name": "petstore_PET",
+                "name": "CODBEX_PET",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -40,7 +40,7 @@
                 ]
             },
             {
-                "name": "petstore_STORE",
+                "name": "CODBEX_STORE",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -100,7 +100,7 @@
                 ]
             },
             {
-                "name": "petstore_USERS",
+                "name": "CODBEX_USERS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -170,7 +170,7 @@
                 ]
             },
             {
-                "name": "petstore_PHOTOURLS",
+                "name": "CODBEX_PHOTOURLS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -200,7 +200,7 @@
                 ]
             },
             {
-                "name": "petstore_TAG",
+                "name": "CODBEX_TAG",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -230,37 +230,37 @@
             {
                 "name": "Store_Pet",
                 "type": "foreignKey",
-                "table": "petstore_STORE",
+                "table": "CODBEX_STORE",
                 "constraintName": "Store_Pet",
                 "columns": "STORE_PETID",
-                "referencedTable": "petstore_PET",
+                "referencedTable": "CODBEX_PET",
                 "referencedColumns": "ENTITY1_ID"
             },
             {
                 "name": "Store_Users",
                 "type": "foreignKey",
-                "table": "petstore_STORE",
+                "table": "CODBEX_STORE",
                 "constraintName": "Store_Users",
                 "columns": "STORE_USERID",
-                "referencedTable": "petstore_USERS",
+                "referencedTable": "CODBEX_USERS",
                 "referencedColumns": "USERS_ID"
             },
             {
                 "name": "photoUrl_Pet",
                 "type": "foreignKey",
-                "table": "petstore_PHOTOURLS",
+                "table": "CODBEX_PHOTOURLS",
                 "constraintName": "photoUrl_Pet",
                 "columns": "PHOTOURLS_PETID",
-                "referencedTable": "petstore_PET",
+                "referencedTable": "CODBEX_PET",
                 "referencedColumns": "ENTITY1_ID"
             },
             {
                 "name": "tag_Pet",
                 "type": "foreignKey",
-                "table": "petstore_TAG",
+                "table": "CODBEX_TAG",
                 "constraintName": "tag_Pet",
                 "columns": "TAG_PETID",
-                "referencedTable": "petstore_PET",
+                "referencedTable": "CODBEX_PET",
                 "referencedColumns": "ENTITY1_ID"
             }
         ]

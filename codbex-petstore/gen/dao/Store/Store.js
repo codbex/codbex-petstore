@@ -4,7 +4,7 @@ const daoApi = require("db/dao");
 const EntityUtils = require("codbex-petstore/gen/dao/utils/EntityUtils");
 
 let dao = daoApi.create({
-	table: "petstore_STORE",
+	table: "CODBEX_STORE",
 	properties: [
 		{
 			name: "id",
@@ -66,7 +66,7 @@ exports.create = function(entity) {
 	EntityUtils.setBoolean(entity, "complete");
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "petstore_STORE",
+		table: "CODBEX_STORE",
 		key: {
 			name: "id",
 			column: "STORE_ID",
@@ -81,7 +81,7 @@ exports.update = function(entity) {
 	EntityUtils.setBoolean(entity, "complete");
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "petstore_STORE",
+		table: "CODBEX_STORE",
 		key: {
 			name: "id",
 			column: "STORE_ID",
@@ -93,7 +93,7 @@ exports.update = function(entity) {
 exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "petstore_STORE",
+		table: "CODBEX_STORE",
 		key: {
 			name: "id",
 			column: "STORE_ID",
@@ -107,7 +107,7 @@ exports.count = function() {
 };
 
 exports.customDataCount = function() {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "petstore_STORE"');
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_STORE"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;

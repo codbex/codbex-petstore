@@ -1,9 +1,9 @@
 {
-  "tablePrefix": "petstore",
+  "tablePrefix": "CODBEX",
   "brand": "CODBEX",
-  "brandUrl": "https://www.codbex.com/",
-  "title": "CODBEX - Petstore",
-  "description": "A petstore made from CODBEX",
+  "brandUrl": "https://www.codbex.com",
+  "title": "CODBEX-Petstore",
+  "description": "A petstore made by Codbex",
   "projectName": "codbex-petstore",
   "workspaceName": "workspace",
   "filePath": "edm.model",
@@ -135,7 +135,7 @@
         }
       ],
       "caption": "Manage Pets",
-      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"petstore_PET\"",
+      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"CODBEX_PET\"",
       "dataName": "PET",
       "dataQuery": "",
       "feedPassword": "YWRtaW4=",
@@ -310,7 +310,7 @@
         }
       ],
       "caption": "Manage Stores",
-      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"petstore_STORE\"",
+      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"CODBEX_STORE\"",
       "dataName": "STORE",
       "dataQuery": "",
       "feedPassword": "YWRtaW4=",
@@ -524,7 +524,7 @@
         }
       ],
       "caption": "Manage Users",
-      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"petstore_USERS\"",
+      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"CODBEX_USERS\"",
       "dataName": "USERS",
       "dataQuery": "",
       "feedPassword": "YWRtaW4=",
@@ -615,7 +615,7 @@
         }
       ],
       "caption": "Manage entity photoUrls",
-      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"petstore_PHOTOURLS\"",
+      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"CODBEX_PHOTOURLS\"",
       "dataName": "PHOTOURLS",
       "dataQuery": "",
       "icon": "/services/web/resources/unicons/file.svg",
@@ -703,7 +703,7 @@
         }
       ],
       "caption": "Manage entity tag",
-      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"petstore_TAG\"",
+      "dataCount": "SELECT COUNT(*) AS COUNT FROM \"CODBEX_TAG\"",
       "dataName": "TAG",
       "dataQuery": "",
       "icon": "/services/web/resources/unicons/file.svg",

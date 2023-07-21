@@ -568,6 +568,6 @@
                 "order": "50"
             }
         ],
-        "sidebar": []
+        "navigations": []
     }
 }

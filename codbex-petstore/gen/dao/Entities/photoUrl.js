@@ -3,7 +3,7 @@ const producer = require("messaging/producer");
 const daoApi = require("db/dao");
 
 let dao = daoApi.create({
-	table: "petstore_PHOTOURLS",
+	table: "CODBEX_PHOTOURLS",
 	properties: [
 		{
 			name: "id",
@@ -12,31 +12,31 @@ let dao = daoApi.create({
 			id: true,
 			autoIncrement: true,
 		},
-		{
+ {
 			name: "url",
 			column: "PHOTOURLS_URL",
 			type: "VARCHAR",
 		},
-		{
+ {
 			name: "Petid",
 			column: "PHOTOURLS_PETID",
 			type: "INTEGER",
 		}
-	]
+]
 });
 
-exports.list = function (settings) {
+exports.list = function(settings) {
 	return dao.list(settings);
 };
 
-exports.get = function (id) {
+exports.get = function(id) {
 	return dao.find(id);
 };
 
-exports.create = function (entity) {
+exports.create = function(entity) {
 	let id = dao.insert(entity);
 	triggerEvent("Create", {
-		table: "petstore_PHOTOURLS",
+		table: "CODBEX_PHOTOURLS",
 		key: {
 			name: "id",
 			column: "PHOTOURLS_ID",
@@ -46,10 +46,10 @@ exports.create = function (entity) {
 	return id;
 };
 
-exports.update = function (entity) {
+exports.update = function(entity) {
 	dao.update(entity);
 	triggerEvent("Update", {
-		table: "petstore_PHOTOURLS",
+		table: "CODBEX_PHOTOURLS",
 		key: {
 			name: "id",
 			column: "PHOTOURLS_ID",
@@ -58,10 +58,10 @@ exports.update = function (entity) {
 	});
 };
 
-exports.delete = function (id) {
+exports.delete = function(id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
-		table: "petstore_PHOTOURLS",
+		table: "CODBEX_PHOTOURLS",
 		key: {
 			name: "id",
 			column: "PHOTOURLS_ID",
@@ -70,12 +70,12 @@ exports.delete = function (id) {
 	});
 };
 
-exports.count = function () {
+exports.count = function() {
 	return dao.count();
 };
 
-exports.customDataCount = function () {
-	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "petstore_PHOTOURLS"');
+exports.customDataCount = function() {
+	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_PHOTOURLS"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
 			return resultSet[0].COUNT;
