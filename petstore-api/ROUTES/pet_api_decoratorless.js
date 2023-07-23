@@ -30,6 +30,7 @@ http.service({
         "post": [{
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
+
                 body.id = request.params.id;
                 ["id", "imageUrl"].forEach(elem => { //TODO
                     if (!(elem in body)) {
@@ -217,7 +218,7 @@ http.service({
     "pet/:petid": {
         "get": [{
             "serve": (_ctx, request, response) => {
-                const pet = daoPet.get(request.params.petid);
+                const pet = daoPet.get(request.params.id);
 
                 if (!pet) {
                     response.setStatus(404); //TODO res.sendError()
@@ -234,7 +235,7 @@ http.service({
         "post": [{
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
-                body.id = request.params.petid;
+                body.id = request.params.id;
                 ["name", "status"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
