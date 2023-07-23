@@ -13,6 +13,8 @@ function isValidDate(dateString) {
 
 const orderStatus = ['placed', 'delivered'];
 
+const petStatus = ['available', 'pending', 'sold'];
+
 http.service({
 	"/store/order": {
 		"post": [{
@@ -112,6 +114,31 @@ http.service({
 			}
 
 			"catch": (_ctx, err, _request, response) => {
+				response.println(err);
+			}
+		}]
+	},
+
+	"/store/inventory": {
+		"get": [{
+			"serve": (_ctx, _request, response) => {
+				allPets = daoPet.list();
+				map = {};
+
+				petStatus.forEach((status) => {
+					map[status] = 0;
+
+					allPets.forEach((pet) => {
+						if (pet.status === status){
+							map[status] ++;
+						}
+					})
+				})
+
+				response.json(map);
+			}
+
+			"catch": (_ctx, err, _request, response){
 				response.println(err);
 			}
 		}]
