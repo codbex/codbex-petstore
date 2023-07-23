@@ -90,6 +90,30 @@ http.service({
 			}
 		}],
 
-		
+		"delete": [{
+			"serve": (_ctx, request, response) => {
+				const id = request.params.id;
+
+				if(!id){
+					response.println("Invalid id");
+					response.setStatus(400);
+					return;
+				}
+
+				daoStore.delete(id);
+
+				if (daoStore.get(id)) {
+					response.println("Error deleting order");
+                    response.setStatus(404);
+                    return;
+                }
+
+                response.setStatus(204);
+			}
+
+			"catch": (_ctx, err, _request, response) => {
+				response.println(err);
+			}
+		}]
 	}
 })
