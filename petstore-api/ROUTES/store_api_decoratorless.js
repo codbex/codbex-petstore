@@ -59,11 +59,37 @@ http.service({
                     response.setStatus(500);
                     return;
                 }
+
+                response.setStatus(200);
+                response.println(JSON.stringify(newOrder));
 			}
 
 			"catch": (_ctx, err, _request, response) => {
 				response.println(err);
 			}
 		}]
+	},
+
+	"/store/order/:orderId": {
+		"get": [{
+			"serve": (_ctx, request, response) => {
+				const order = daoOrder.get(request.params.id);
+
+				if (!order) {
+					response.println("Order not found!");
+                    response.setStatus(404);
+                    return;
+                }
+
+                response.setStatus(200);
+                response.println(JSON.stringify(pet));
+			}
+
+			"catch": (_ctx, err, request, response) => {
+				response.println(err);
+			}
+		}],
+
+		
 	}
 })
