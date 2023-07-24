@@ -8,7 +8,7 @@ const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
 
 function isValidDate(dateString) {
 	const dateObj = new Date(dateString);
-	return !isNaN(dateObj) && dateObj instanceof Date;
+	return dateObj instanceof Date;
 }
 
 const orderStatus = ['placed', 'delivered'];
@@ -16,55 +16,55 @@ const orderStatus = ['placed', 'delivered'];
 const petStatus = ['available', 'pending', 'sold'];
 
 http.service({
-	"/store/order": {
+	"store/order": {
 		"post": [{
 			"serve": (_ctx, request, response) => {
 				const body = request.getJSON();
 
-                ["petId", "quantity", "shipDate", "status"].forEach(elem => {
-                    if (!(elem in body)) {
-                        response.setStatus(400);
-                        return;
-                    }
-                });
+				["petId", "quantity", "shipDate", "status"].forEach(elem => {
+					if (!(elem in body)) {
+						response.setStatus(400);
+						return;
+					}
+				});
 
-                const pet = daoPet.get(body.petid);
+				const pet = daoPet.get(body.petid);
 
-                if (!pet) {
-                	response.println("Pet not found!")
-                    response.setStatus(404);
-                    return;
-                }
+				if (!pet) {
+					response.println("Pet not found!")
+					response.setStatus(404);
+					return;
+				}
 
-                if(body.quantity < 1){
-                	response.println("Invalid Quantity");
-                    response.setStatus(400);
-                    return;
-                }
+				if (body.quantity < 1) {
+					response.println("Invalid Quantity");
+					response.setStatus(400);
+					return;
+				}
 
-                if(!isValidDate(body.shipDate)){
-                	response.println("Invalid Ship Date");
-                    response.setStatus(400);
-                    return;
-                }
+				if (!isValidDate(body.shipDate)) {
+					response.println("Invalid Ship Date");
+					response.setStatus(400);
+					return;
+				}
 
-                if(!orderStatus.includes(body.status)){
-                	response.println("Invalid Status");
-                    response.setStatus(400);
-                    return;
-                }
+				if (!orderStatus.includes(body.status)) {
+					response.println("Invalid Status");
+					response.setStatus(400);
+					return;
+				}
 
-                newOreder = daoStore.create(body);
+				newOreder = daoStore.create(body);
 
-                if (!newOrder) {
-                    response.println("Could not create the order");
-                    response.setStatus(500);
-                    return;
-                }
+				if (!newOrder) {
+					response.println("Could not create the order");
+					response.setStatus(500);
+					return;
+				}
 
-                response.setStatus(200);
-                response.println(JSON.stringify(newOrder));
-			}
+				response.setStatus(200);
+				response.println(JSON.stringify(newOrder));
+			},
 
 			"catch": (_ctx, err, _request, response) => {
 				response.println(err);
@@ -72,22 +72,22 @@ http.service({
 		}]
 	},
 
-	"/store/order/:orderId": {
+	"store/order/:orderId": {
 		"get": [{
 			"serve": (_ctx, request, response) => {
-				const order = daoOrder.get(request.params.id);
+				const order = daoStore.get(request.params.orderId);
 
 				if (!order) {
 					response.println("Order not found!");
-                    response.setStatus(404);
-                    return;
-                }
+					response.setStatus(404);
+					return;
+				}
 
-                response.setStatus(200);
-                response.println(JSON.stringify(pet));
-			}
+				response.setStatus(200);
+				response.println(JSON.stringify(pet));
+			},
 
-			"catch": (_ctx, err, request, response) => {
+			"catch": (_ctx, err, _request, response) => {
 				response.println(err);
 			}
 		}],
@@ -96,7 +96,7 @@ http.service({
 			"serve": (_ctx, request, response) => {
 				const id = request.params.id;
 
-				if(!id){
+				if (!id) {
 					response.println("Invalid id");
 					response.setStatus(400);
 					return;
@@ -106,12 +106,12 @@ http.service({
 
 				if (daoStore.get(id)) {
 					response.println("Error deleting order");
-                    response.setStatus(404);
-                    return;
-                }
+					response.setStatus(404);
+					return;
+				}
 
-                response.setStatus(204);
-			}
+				response.setStatus(204);
+			},
 
 			"catch": (_ctx, err, _request, response) => {
 				response.println(err);
@@ -119,26 +119,26 @@ http.service({
 		}]
 	},
 
-	"/store/inventory": {
+	"store/inventory": {
 		"get": [{
 			"serve": (_ctx, _request, response) => {
-				allPets = daoPet.list();
-				map = {};
+				let allPets = daoPet.list();
+				let map = {};
 
 				petStatus.forEach((status) => {
 					map[status] = 0;
 
 					allPets.forEach((pet) => {
-						if (pet.status === status){
-							map[status] ++;
+						if (pet.status === status) {
+							map[status]++;
 						}
 					})
 				})
 
-				response.json(map);
-			}
+				response.json(JSON.stringify(map));
+			},
 
-			"catch": (_ctx, err, _request, response){
+			"catch": (_ctx, err, _request, response) => {
 				response.println(err);
 			}
 		}]
