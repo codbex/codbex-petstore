@@ -21,7 +21,7 @@ http.service({
 
 				//response.println(body.petId);
 
-				["petId", "quantity", "shipDate", "status", "userId"].forEach(elem => {
+				["petId", "quantity", "shipDate", "orderStatus", "userId"].forEach(elem => {
 					if (!(elem in body)) {
 						response.setStatus(404);
 						response.println("U")
@@ -57,11 +57,13 @@ http.service({
 					return;
 				}
 
-				if (!orderStatus.includes(body.status)) {
+				if (!orderStatus.includes(body.orderStatus)) {
 					response.println("Invalid Status");
 					response.setStatus(400);
 					return;
 				}
+
+				body.orderStatusid = orderStatus.indexOf(body.orderStatus);
 
 				const newOrder = daoStore.get(daoStore.create(body));
 
