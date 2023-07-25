@@ -93,7 +93,7 @@ http.service({
 				}
 
 				response.setStatus(200);
-				response.println(JSON.stringify(pet));
+				response.println(JSON.stringify(order));
 			},
 
 			"catch": (_ctx, err, _request, response) => {
@@ -103,7 +103,7 @@ http.service({
 
 		"delete": [{
 			"serve": (_ctx, request, response) => {
-				const id = request.params.id;
+				const id = request.params.orderId;
 
 				if (!id) {
 					response.println("Invalid id");
@@ -144,7 +144,7 @@ http.service({
 					})
 				})
 
-				response.json(JSON.stringify(map));
+				response.println(JSON.stringify(map));
 			},
 
 			"catch": (_ctx, err, _request, response) => {
