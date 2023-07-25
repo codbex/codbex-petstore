@@ -167,13 +167,13 @@ http.service({
                     }
                 });
 
-                const updatedPet = daoPet.update(body);
-
-                if (!updatedPet) {
+                if (!daoPet.get(body.id)) {
                     response.setStatus(404);
                     response.println("Pet not found");
                     return;
                 }
+
+                daoPet.update(body);
 
                 body.imageUrl.forEach((url) => {
                     if (!isValidUrl(url)) {
@@ -233,7 +233,7 @@ http.service({
                 const pet = daoPet.get(request.params.petid);
 
                 if (!pet) {
-                    response.setStatus(404); //TODO res.sendError()
+                    response.setStatus(404);
                     response.println("Pet not found!")
                     return;
                 }
@@ -248,6 +248,7 @@ http.service({
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
                 body.id = request.params.petid;
+
                 ["name", "status"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
@@ -262,13 +263,13 @@ http.service({
                     return;
                 }
 
-                const updatedPet = daoPet.update(body);
-
-                if (!updatedPet) {
+                if (daoPet.get(body.id)) {
                     response.setStatus(404);
                     response.println("Pet not found");
                     return;
                 }
+
+                daoPet.update(body);
 
                 response.setStatus(200)
                 response.println(JSON.stringify(updatedPet));
