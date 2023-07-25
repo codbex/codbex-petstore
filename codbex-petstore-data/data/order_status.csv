@@ -1,5 +1,5 @@
 ORDERSTATUS_ID,ORDERSTATUS_NAME
-1, placed
-2, delivered
-3, in progress
+0, placed
+1, delivered
+2, in progress
 
