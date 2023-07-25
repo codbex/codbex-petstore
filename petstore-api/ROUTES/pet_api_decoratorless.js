@@ -30,15 +30,17 @@ http.service({
         "post": [{
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
-                body.id = request.params.id;
-                ["id", "imageUrl"].forEach(elem => { //TODO
+
+                body.id = request.params.petId;
+
+                ["id", "imageUrl"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
                         return;
                     }
                 });
 
-                if (!daoPet.find(body.id)) {
+                if (!daoPet.get(body.id)) {
                     response.setStatus(404);
                     return;
                 }
@@ -61,6 +63,7 @@ http.service({
         "post": [{
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
+
                 ["name", "category", "status", "imageUrl", "tags"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
@@ -68,19 +71,21 @@ http.service({
                     }
                 });
 
-                if (!petCategories.includes(body.category)) {
+                body.petCategoryId = petCategories.indexOf(body.category);
+                if (body.petCategoryId == -1) {
                     response.println("Invalid Category");
                     response.setStatus(400);
                     return;
                 }
 
-                if (!petStatus.includes(body.status)) {
+                body.petstatusid = petStatus.indexOf(body.status); //TODO petSStatus
+                if (body.petstatusid == -1) {
                     response.println("Invalid status");
                     response.setStatus(400);
                     return;
                 }
 
-                const newPet = daoPet.create(body);
+                const newPet = daoPet.get(daoPet.create(body));
 
                 if (!newPet) {
                     response.println("Could not create the pet");
@@ -129,43 +134,51 @@ http.service({
                 ["id", "name", "category", "status", "imageUrl", "tags"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
+                        response.println("U");
                         return;
                     }
                 });
 
-                const petId = body.id;
-                const updateData = body;
-
-                delete updateData.id;
-
                 if (!petCategories.includes(body.category)) {
                     response.setStatus(400);
+                    response.println("Invalid category");
                     return;
                 }
 
                 if (!petStatus.includes(body.status)) {
                     response.setStatus(400);
+                    response.println("Invalid status");
                     return;
                 }
 
-                body.imageUrl.forEach((url) => {
-                    daoImg.delete(url.id);
+                urlList = daoImg.list();
+
+                urlList.forEach((url) => {
+                    if (url.petid === body.id) {
+                        daoImg.delete(url.id);
+                    }
                 });
 
-                body.tags.forEach((tag) => {
-                    daoTag.delete(tag.id);
+                tagList = daoTag.list();
+
+                tagList.forEach((tag) => {
+                    if (tag.petid === body.id) {
+                        daoImg.delete(tag.id);
+                    }
                 });
 
-                const updatedPet = daoPet.update(petId, updateData);
+                const updatedPet = daoPet.update(body);
 
                 if (!updatedPet) {
                     response.setStatus(404);
+                    response.println("Pet not found");
                     return;
                 }
 
                 body.imageUrl.forEach((url) => {
                     if (!isValidUrl(url)) {
                         response.setStatus(400);
+                        response.println("Invalid image url");
                         return;
                     } else {
                         daoImg.create(updatedPet.id, url);
@@ -238,12 +251,14 @@ http.service({
                 ["name", "status"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
+                        response.println("U");
                         return;
                     }
                 });
 
-                if (body.status && !petStatus.includes(body.status)) {
+                if (!petStatus.includes(body.status)) {
                     response.setStatus(400);
+                    response.println("Invalid status");
                     return;
                 }
 
@@ -251,6 +266,7 @@ http.service({
 
                 if (!updatedPet) {
                     response.setStatus(404);
+                    response.println("Pet not found");
                     return;
                 }
 
@@ -266,7 +282,8 @@ http.service({
             "serve": (_ctx, request, response) => {
                 const id = request.params.petid;
                 if (!id) {
-                    response.setStatus(400);
+                    response.setStatus(404);
+                    response.println("Id not found");
                     return;
                 }
 
@@ -274,6 +291,7 @@ http.service({
 
                 if (daoPet.get(id)) {
                     response.setStatus(404);
+                    response.println("Pet not found");
                     return;
                 }
 

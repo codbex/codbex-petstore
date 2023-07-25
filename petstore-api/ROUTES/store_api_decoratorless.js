@@ -1,10 +1,8 @@
-//----------------------TODO---------------------
-// Do the  oreders have statuses in the DB
-
 const http = require("http/rs");
 
 const daoStore = require("codbex-petstore/gen/dao/Store/Store.js");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
+const daoUser = require("codbex-petstore/gen/dao/Users/Users.js")
 
 function isValidDate(dateString) {
 	const dateObj = new Date(dateString);
@@ -21,17 +19,28 @@ http.service({
 			"serve": (_ctx, request, response) => {
 				const body = request.getJSON();
 
-				["petId", "quantity", "shipDate", "status"].forEach(elem => {
+				//response.println(body.petId);
+
+				["petId", "quantity", "shipDate", "status", "userId"].forEach(elem => {
 					if (!(elem in body)) {
-						response.setStatus(400);
+						response.setStatus(404);
+						response.println("U")
 						return;
 					}
 				});
 
-				const pet = daoPet.get(body.petid);
+				const pet = daoPet.get(body.petId);
 
 				if (!pet) {
 					response.println("Pet not found!")
+					response.setStatus(404);
+					return;
+				}
+
+				const user = daoUser.get(body.userId);
+
+				if (!user) {
+					response.println("User not found!")
 					response.setStatus(404);
 					return;
 				}
@@ -54,7 +63,7 @@ http.service({
 					return;
 				}
 
-				newOreder = daoStore.create(body);
+				const newOrder = daoStore.get(daoStore.create(body));
 
 				if (!newOrder) {
 					response.println("Could not create the order");

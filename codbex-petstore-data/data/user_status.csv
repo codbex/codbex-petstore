@@ -1,5 +1,5 @@
-"USERSTATUS_ID","USERSTATUS_NAME"
-"0","Anonynous"
-"1","Active"
-"2","Inactive"
-"3","Blocked"
+USERSTATUS_ID, USERSTATUS_NAME
+0, Anonynous
+1, Active
+2, Inactive
+3, Blocked

@@ -37,12 +37,12 @@ class UserApi {
 
     }
 
-    @Put("/pet/:username")
+    @Put("/user/:username")
     updateUserByUsername(_body, _ctx) {
 
     }
 
-    @Delete("/pet/:petid")
+    @Delete("/user/:username")
     deleteUserByUsername(_body, _ctx) {
 
     }
