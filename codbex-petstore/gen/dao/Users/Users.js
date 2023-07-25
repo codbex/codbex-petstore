@@ -43,14 +43,14 @@ let dao = daoApi.create({
 			type: "VARCHAR",
 		},
  {
-			name: "status",
-			column: "USERS_STATUS",
-			type: "VARCHAR",
-		},
- {
 			name: "profileUrl",
 			column: "USERS_PROFILEURL",
 			type: "VARCHAR",
+		},
+ {
+			name: "userStatusid",
+			column: "USERS_USERSTATUSID",
+			type: "INTEGER",
 		}
 ]
 });

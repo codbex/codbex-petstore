@@ -29,25 +29,6 @@
             <fd-fieldset class="fd-margin--md" ng-form="formFieldset">
                 <fd-form-group dg-header="{{formHeaders[action]}}" name="entityForm">
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idcategory" dg-required="false" dg-colon="true">category</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.category ? false : true }}">
-                            <fd-input id="idcategory"
-                                name="category"
-                                state="{{ formErrors.category ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['category'].$valid, 'category')"
-                                ng-model="entity.category"
-                                ng-readonly="action === 'select'"
-                                ng-minlength="0.0 || 0"
-                                ng-maxlength="20.0 || -1"
-                                dg-input-rules="{ patterns: [''] }"
-                                type="text"
-                                placeholder="Enter category">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
-                    </fd-form-item>
-                    <fd-form-item horizontal="false">
                         <fd-form-label for="idname" dg-required="false" dg-colon="true">name</fd-form-label>
                         <fd-form-input-message-group dg-inactive="{{ formErrors.name ? false : true }}">
                             <fd-input id="idname"
@@ -67,23 +48,30 @@
                         </fd-form-input-message-group>
                     </fd-form-item>
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idstatus" dg-required="false" dg-colon="true">status</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.status ? false : true }}">
-                            <fd-input id="idstatus"
-                                name="status"
-                                state="{{ formErrors.status ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['status'].$valid, 'status')"
-                                ng-model="entity.status"
-                                ng-readonly="action === 'select'"
-                                ng-minlength="0.0 || 0"
-                                ng-maxlength="20.0 || -1"
-                                dg-input-rules="{ patterns: [''] }"
-                                type="text"
-                                placeholder="Enter status">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
+                        <fd-form-label for="idpetstatusid" dg-required="false" dg-colon="true">petstatusid</fd-form-label>
+                        <fd-combobox-input id="idpetstatusid"
+                            name="petstatusid"
+                            state="{{ formErrors.petstatusid ? 'error' : '' }}"
+                            ng-required="true"
+                            ng-change="isValid(formFieldset['petstatusid'].$valid, 'petstatusid')"
+                            ng-model="entity.petstatusid"
+                            dg-disabled="action === 'select'"
+                            dropdown-items="optionspetstatusid"
+                            dg-placeholder="Search petstatusid ...">
+                        </fd-combobox-input>
+                    </fd-form-item>
+                    <fd-form-item horizontal="false">
+                        <fd-form-label for="idpetCategoryid" dg-required="false" dg-colon="true">petCategoryid</fd-form-label>
+                        <fd-combobox-input id="idpetCategoryid"
+                            name="petCategoryid"
+                            state="{{ formErrors.petCategoryid ? 'error' : '' }}"
+                            ng-required="true"
+                            ng-change="isValid(formFieldset['petCategoryid'].$valid, 'petCategoryid')"
+                            ng-model="entity.petCategoryid"
+                            dg-disabled="action === 'select'"
+                            dropdown-items="optionspetCategoryid"
+                            dg-placeholder="Search petCategoryid ...">
+                        </fd-combobox-input>
                     </fd-form-item>
             </fd-fieldset>
         </fd-scrollbar>

@@ -30,9 +30,9 @@
 						<th fd-table-header-cell>quantity</th>
 						<th fd-table-header-cell>petId</th>
 						<th fd-table-header-cell>shipDate</th>
-						<th fd-table-header-cell>status</th>
 						<th fd-table-header-cell>complete</th>
 						<th fd-table-header-cell>userId</th>
+						<th fd-table-header-cell>orderStatusid</th>
 						<th fd-table-header-cell></th>
 					</tr>
 				</thead>
@@ -49,10 +49,12 @@
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
 							<fd-input type="date" ng-model="next.shipDate" ng-readonly="true"></fd-input>
 						</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.complete}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
 							{{optionsuserIdValue(next.userId)}}
+						</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							{{optionsorderStatusidValue(next.orderStatusid)}}
 						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>

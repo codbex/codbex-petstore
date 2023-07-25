@@ -13,19 +13,19 @@ let dao = daoApi.create({
 			autoIncrement: true,
 		},
  {
-			name: "category",
-			column: "ENTITY1_CATEGORY",
-			type: "VARCHAR",
-		},
- {
 			name: "name",
 			column: "ENTITY1_NAME",
 			type: "VARCHAR",
 		},
  {
-			name: "status",
-			column: "ENTITY1_STATUS",
-			type: "VARCHAR",
+			name: "petstatusid",
+			column: "PET_PETSTATUSID",
+			type: "INTEGER",
+		},
+ {
+			name: "petCategoryid",
+			column: "PET_PETCATEGORYID",
+			type: "INTEGER",
 		}
 ]
 });

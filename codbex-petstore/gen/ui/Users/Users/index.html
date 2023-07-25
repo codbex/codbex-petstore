@@ -33,8 +33,8 @@
 						<th fd-table-header-cell>email</th>
 						<th fd-table-header-cell>password</th>
 						<th fd-table-header-cell>phone</th>
-						<th fd-table-header-cell>status</th>
 						<th fd-table-header-cell>profileUrl</th>
+						<th fd-table-header-cell>userStatusid</th>
 						<th fd-table-header-cell></th>
 					</tr>
 				</thead>
@@ -54,9 +54,11 @@
 						<td fd-table-cell>
 							<a href="tel:{{next.phone}}" class="fd-link">{{next.phone}}</a>
 						</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
 						<td fd-table-cell>
 							<a href="{{next.profileUrl}}" target="_blank" class="fd-link">{{next.profileUrl}}</a>
+						</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							{{optionsuserStatusidValue(next.userStatusid)}}
 						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>

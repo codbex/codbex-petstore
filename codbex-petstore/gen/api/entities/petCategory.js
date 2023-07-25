@@ -1,5 +1,5 @@
 const rs = require("http/rs");
-const dao = require("codbex-petstore/gen/dao/Entities/tag");
+const dao = require("codbex-petstore/gen/dao/entities/petCategory");
 const http = require("codbex-petstore/gen/api/utils/http");
 
 rs.service()
@@ -43,7 +43,7 @@ rs.service()
 			if (entity) {
 			    http.sendResponseOk(entity);
 			} else {
-				http.sendResponseNotFound("tag not found");
+				http.sendResponseNotFound("petCategory not found");
 			}
 		})
 		.produces(["application/json"])
@@ -60,7 +60,7 @@ rs.service()
 		.post(function(ctx, request, response) {
 			let entity = request.getJSON();
 			entity.id = dao.create(entity);
-			response.setHeader("Content-Location", "/services/js/codbex-petstore/gen/api/tag.js/" + entity.id);
+			response.setHeader("Content-Location", "/services/js/codbex-petstore/gen/api/petCategory.js/" + entity.id);
 			http.sendResponseCreated(entity);
 		})
 		.produces(["application/json"])
@@ -98,7 +98,7 @@ rs.service()
 				dao.delete(id);
 				http.sendResponseNoContent();
 			} else {
-				http.sendResponseNotFound("tag not found");
+				http.sendResponseNotFound("petCategory not found");
 			}
 		})
 		.catch(function(ctx, error) {

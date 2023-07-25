@@ -63,6 +63,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				entity: entity,
 				optionspetId: $scope.optionspetId,
 				optionsuserId: $scope.optionsuserId,
+				optionsorderStatusid: $scope.optionsorderStatusid,
 			});
 		};
 
@@ -73,6 +74,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				entity: {},
 				optionspetId: $scope.optionspetId,
 				optionsuserId: $scope.optionsuserId,
+				optionsorderStatusid: $scope.optionsorderStatusid,
 			}, null, false);
 		};
 
@@ -82,6 +84,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				entity: entity,
 				optionspetId: $scope.optionspetId,
 				optionsuserId: $scope.optionsuserId,
+				optionsorderStatusid: $scope.optionsorderStatusid,
 			}, null, false);
 		};
 
@@ -117,6 +120,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//----------------Dropdowns-----------------//
 		$scope.optionspetId = [];
 		$scope.optionsuserId = [];
+		$scope.optionsorderStatusid = [];
 
 		$http.get("/services/js/codbex-petstore/gen/api/Pet/Pet.js").then(function (response) {
 			$scope.optionspetId = response.data.map(e => {
@@ -135,6 +139,15 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 			});
 		});
+
+		$http.get("/services/js/codbex-petstore/gen/api/entities/orderStatus.js").then(function (response) {
+			$scope.optionsorderStatusid = response.data.map(e => {
+				return {
+					value: e.id,
+					text: e.name
+				}
+			});
+		});
 		$scope.optionspetIdValue = function (optionKey) {
 			for (let i = 0; i < $scope.optionspetId.length; i++) {
 				if ($scope.optionspetId[i].value === optionKey) {
@@ -147,6 +160,14 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			for (let i = 0; i < $scope.optionsuserId.length; i++) {
 				if ($scope.optionsuserId[i].value === optionKey) {
 					return $scope.optionsuserId[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionsorderStatusidValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsorderStatusid.length; i++) {
+				if ($scope.optionsorderStatusid[i].value === optionKey) {
+					return $scope.optionsorderStatusid[i].text;
 				}
 			}
 			return null;

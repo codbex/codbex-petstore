@@ -143,25 +143,6 @@
                         </fd-form-input-message-group>
                     </fd-form-item>
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idstatus" dg-required="false" dg-colon="true">status</fd-form-label>
-                        <fd-form-input-message-group dg-inactive="{{ formErrors.status ? false : true }}">
-                            <fd-input id="idstatus"
-                                name="status"
-                                state="{{ formErrors.status ? 'error' : '' }}"
-								ng-required="false"
-                                ng-change="isValid(formFieldset['status'].$valid, 'status')"
-                                ng-model="entity.status"
-                                ng-readonly="action === 'select'"
-                                ng-minlength="0.0 || 0"
-                                ng-maxlength="20.0 || -1"
-                                dg-input-rules="{ patterns: [''] }"
-                                type="text"
-                                placeholder="Enter status">
-                            </fd-input>
-                            <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
-                        </fd-form-input-message-group>
-                    </fd-form-item>
-                    <fd-form-item horizontal="false">
                         <fd-form-label for="idprofileUrl" dg-required="false" dg-colon="true">profileUrl</fd-form-label>
                         <fd-form-input-message-group dg-inactive="{{ formErrors.profileUrl ? false : true }}">
                             <fd-input id="idprofileUrl"
@@ -179,6 +160,19 @@
                             </fd-input>
                             <fd-form-message dg-type="error">Incorrect Input</fd-form-message>
                         </fd-form-input-message-group>
+                    </fd-form-item>
+                    <fd-form-item horizontal="false">
+                        <fd-form-label for="iduserStatusid" dg-required="false" dg-colon="true">userStatusid</fd-form-label>
+                        <fd-combobox-input id="iduserStatusid"
+                            name="userStatusid"
+                            state="{{ formErrors.userStatusid ? 'error' : '' }}"
+                            ng-required="true"
+                            ng-change="isValid(formFieldset['userStatusid'].$valid, 'userStatusid')"
+                            ng-model="entity.userStatusid"
+                            dg-disabled="action === 'select'"
+                            dropdown-items="optionsuserStatusid"
+                            dg-placeholder="Search userStatusid ...">
+                        </fd-combobox-input>
                     </fd-form-item>
             </fd-fieldset>
         </fd-scrollbar>

@@ -29,11 +29,6 @@ let dao = daoApi.create({
 			type: "DATE",
 		},
  {
-			name: "status",
-			column: "STORE_STATUS",
-			type: "VARCHAR",
-		},
- {
 			name: "complete",
 			column: "STORE_COMPLETE",
 			type: "BOOLEAN",
@@ -41,6 +36,11 @@ let dao = daoApi.create({
  {
 			name: "userId",
 			column: "STORE_USERID",
+			type: "INTEGER",
+		},
+ {
+			name: "orderStatusid",
+			column: "STORE_ORDERSTATUSID",
 			type: "INTEGER",
 		}
 ]

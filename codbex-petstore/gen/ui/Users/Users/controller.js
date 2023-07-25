@@ -5,7 +5,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["entityApiProvider", function (entityApiProvider) {
 		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/api/Users/Users.js";
 	}])
-	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
+	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', function ($scope, $http, messageHub, entityApi) {
 
 		function resetPagination() {
 			$scope.dataPage = 1;
@@ -54,6 +54,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Users-details", {
 				action: "select",
 				entity: entity,
+				optionsuserStatusid: $scope.optionsuserStatusid,
 			});
 		};
 
@@ -62,6 +63,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Users-details", {
 				action: "create",
 				entity: {},
+				optionsuserStatusid: $scope.optionsuserStatusid,
 			}, null, false);
 		};
 
@@ -69,6 +71,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Users-details", {
 				action: "update",
 				entity: entity,
+				optionsuserStatusid: $scope.optionsuserStatusid,
 			}, null, false);
 		};
 
@@ -100,5 +103,26 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 			});
 		};
+
+		//----------------Dropdowns-----------------//
+		$scope.optionsuserStatusid = [];
+
+		$http.get("/services/js/codbex-petstore/gen/api/entities/userStatus.js").then(function (response) {
+			$scope.optionsuserStatusid = response.data.map(e => {
+				return {
+					value: e.id,
+					text: e.name
+				}
+			});
+		});
+		$scope.optionsuserStatusidValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsuserStatusid.length; i++) {
+				if ($scope.optionsuserStatusid[i].value === optionKey) {
+					return $scope.optionsuserStatusid[i].text;
+				}
+			}
+			return null;
+		};
+		//----------------Dropdowns-----------------//
 
 	}]);

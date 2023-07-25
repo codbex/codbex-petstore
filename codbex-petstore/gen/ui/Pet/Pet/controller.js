@@ -5,7 +5,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["entityApiProvider", function (entityApiProvider) {
 		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/api/Pet/Pet.js";
 	}])
-	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
+	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', function ($scope, $http, messageHub, entityApi) {
 
 		function resetPagination() {
 			$scope.dataPage = 1;
@@ -54,6 +54,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Pet-details", {
 				action: "select",
 				entity: entity,
+				optionspetstatusid: $scope.optionspetstatusid,
+				optionspetCategoryid: $scope.optionspetCategoryid,
 			});
 		};
 
@@ -62,6 +64,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Pet-details", {
 				action: "create",
 				entity: {},
+				optionspetstatusid: $scope.optionspetstatusid,
+				optionspetCategoryid: $scope.optionspetCategoryid,
 			}, null, false);
 		};
 
@@ -69,6 +73,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Pet-details", {
 				action: "update",
 				entity: entity,
+				optionspetstatusid: $scope.optionspetstatusid,
+				optionspetCategoryid: $scope.optionspetCategoryid,
 			}, null, false);
 		};
 
@@ -100,5 +106,44 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 			});
 		};
+
+		//----------------Dropdowns-----------------//
+		$scope.optionspetstatusid = [];
+		$scope.optionspetCategoryid = [];
+
+		$http.get("/services/js/codbex-petstore/gen/api/entities/petstatus.js").then(function (response) {
+			$scope.optionspetstatusid = response.data.map(e => {
+				return {
+					value: e.id,
+					text: e.name
+				}
+			});
+		});
+
+		$http.get("/services/js/codbex-petstore/gen/api/entities/petCategory.js").then(function (response) {
+			$scope.optionspetCategoryid = response.data.map(e => {
+				return {
+					value: e.id,
+					text: e.name
+				}
+			});
+		});
+		$scope.optionspetstatusidValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionspetstatusid.length; i++) {
+				if ($scope.optionspetstatusid[i].value === optionKey) {
+					return $scope.optionspetstatusid[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionspetCategoryidValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionspetCategoryid.length; i++) {
+				if ($scope.optionspetCategoryid[i].value === optionKey) {
+					return $scope.optionspetCategoryid[i].text;
+				}
+			}
+			return null;
+		};
+		//----------------Dropdowns-----------------//
 
 	}]);

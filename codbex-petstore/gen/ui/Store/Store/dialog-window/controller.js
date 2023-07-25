@@ -33,6 +33,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				$scope.selectedMainEntityId = params.selectedMainEntityId;
 				$scope.optionspetId = params.optionspetId;
 				$scope.optionsuserId = params.optionsuserId;
+				$scope.optionsorderStatusid = params.optionsorderStatusid;
 			}
 		}
 

@@ -27,9 +27,9 @@
 			<table fd-table display-mode="compact">
 				<thead fd-table-header sticky="true">
 					<tr fd-table-row>
-						<th fd-table-header-cell>category</th>
 						<th fd-table-header-cell>name</th>
-						<th fd-table-header-cell>status</th>
+						<th fd-table-header-cell>petstatusid</th>
+						<th fd-table-header-cell>petCategoryid</th>
 						<th fd-table-header-cell></th>
 					</tr>
 				</thead>
@@ -39,9 +39,13 @@
 					</tr>
 					<tr fd-table-row hoverable="true" ng-repeat="next in data"
 						dg-selected="next.id === selectedEntity.id" ng-click="selectEntity(next)">
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.category}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.name}}</td>
-						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.status}}</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							{{optionspetstatusidValue(next.petstatusid)}}
+						</td>
+						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
+							{{optionspetCategoryidValue(next.petCategoryid)}}
+						</td>
 						<td fd-table-cell fit-content="true">
 							<fd-popover>
 								<fd-popover-control>

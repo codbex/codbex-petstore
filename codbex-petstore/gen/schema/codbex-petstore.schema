@@ -15,14 +15,6 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 50,
-                        "precision": "NaN",
-                        "scale": "NaN",
-                        "nullable": true,
-                        "name": "ENTITY1_CATEGORY"
-                    },
-                    {
-                        "type": "VARCHAR",
                         "length": 20,
                         "precision": "NaN",
                         "scale": "NaN",
@@ -30,12 +22,20 @@
                         "name": "ENTITY1_NAME"
                     },
                     {
-                        "type": "VARCHAR",
-                        "length": 20,
+                        "type": "INTEGER",
+                        "length": 0,
                         "precision": "NaN",
                         "scale": "NaN",
                         "nullable": true,
-                        "name": "ENTITY1_STATUS"
+                        "name": "PET_PETSTATUSID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "precision": "NaN",
+                        "scale": "NaN",
+                        "nullable": true,
+                        "name": "PET_PETCATEGORYID"
                     }
                 ]
             },
@@ -76,12 +76,6 @@
                         "name": "STORE_SHIPDATE"
                     },
                     {
-                        "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "STORE_STATUS"
-                    },
-                    {
                         "type": "BOOLEAN",
                         "length": 20,
                         "precision": "NaN",
@@ -96,6 +90,14 @@
                         "scale": "NaN",
                         "nullable": true,
                         "name": "STORE_USERID"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "precision": "NaN",
+                        "scale": "NaN",
+                        "nullable": true,
+                        "name": "STORE_ORDERSTATUSID"
                     }
                 ]
             },
@@ -155,17 +157,19 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
-                        "name": "USERS_STATUS"
-                    },
-                    {
-                        "type": "VARCHAR",
                         "length": 100,
                         "precision": "NaN",
                         "scale": "NaN",
                         "nullable": true,
                         "name": "USERS_PROFILEURL"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "precision": "NaN",
+                        "scale": "NaN",
+                        "nullable": true,
+                        "name": "USERS_USERSTATUSID"
                     }
                 ]
             },
@@ -228,6 +232,104 @@
                 ]
             },
             {
+                "name": "CODBEX_PETSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PETSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "PETSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "CODBEX_PETCATEGORY",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "PETCATEGORY_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "PETCATEGORY_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "CODBEX_ORDERSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ORDERSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ORDERSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "CODBEX_ORDERSTATUS",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "length": 0,
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "ORDERSTATUS_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "ORDERSTATUS_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "Pet_petstatus",
+                "type": "foreignKey",
+                "table": "CODBEX_PET",
+                "constraintName": "Pet_petstatus",
+                "columns": "PET_PETSTATUSID",
+                "referencedTable": "CODBEX_PETSTATUS",
+                "referencedColumns": "PETSTATUS_ID"
+            },
+            {
+                "name": "Pet_petCategory",
+                "type": "foreignKey",
+                "table": "CODBEX_PET",
+                "constraintName": "Pet_petCategory",
+                "columns": "PET_PETCATEGORYID",
+                "referencedTable": "CODBEX_PETCATEGORY",
+                "referencedColumns": "PETCATEGORY_ID"
+            },
+            {
                 "name": "Store_Pet",
                 "type": "foreignKey",
                 "table": "CODBEX_STORE",
@@ -244,6 +346,24 @@
                 "columns": "STORE_USERID",
                 "referencedTable": "CODBEX_USERS",
                 "referencedColumns": "USERS_ID"
+            },
+            {
+                "name": "Store_orderStatus",
+                "type": "foreignKey",
+                "table": "CODBEX_STORE",
+                "constraintName": "Store_orderStatus",
+                "columns": "STORE_ORDERSTATUSID",
+                "referencedTable": "CODBEX_ORDERSTATUS",
+                "referencedColumns": "ORDERSTATUS_ID"
+            },
+            {
+                "name": "Users_userStatus",
+                "type": "foreignKey",
+                "table": "CODBEX_USERS",
+                "constraintName": "Users_userStatus",
+                "columns": "USERS_USERSTATUSID",
+                "referencedTable": "CODBEX_ORDERSTATUS",
+                "referencedColumns": "ORDERSTATUS_ID"
             },
             {
                 "name": "photoUrl_Pet",
