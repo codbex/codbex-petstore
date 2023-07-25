@@ -23,52 +23,126 @@ http.service({
     "user": {
         "post": [{
             "serve": (_ctx, request, response) => {
-                const body = request.getJSON();
-
-                ["username", "firstname", "lastname", "email", "password", "phone", "profileUrl", "userStatus"].forEach(elem => {
-                    if (!(elem in body)) {
-                        response.setStatus(400);
-                        return;
-                    }
-                });
-
-                body.userStatusId = userStatuses.indexOf(body.userStatus);
-
-                if (body.userStatusId == -1) {
-                    response.println("userStatus is incorrect!")
-                    response.setStatus(400);
-                    return;
-                }
-
-                const user = daoUsers.get(daoUsers.create(body));
-
-                if (!user) {
-                    response.println("User was not created!")
-                    response.setStatus(500);
-                    return;
-                }//!
-
-                if (!isValidUrl(body.profileUrl)) {
-                    response.println("Invalid profileUrl");
-                    response.setStatus(400);
-                    return;
-                }
-
-                newOreder = daoUsers.get(daoUsers.create(body));
-
-                if (!newOrder) {
-                    response.println("Could not create the order");
-                    response.setStatus(500);
-                    return;
-                }
-
-                response.setStatus(200);
-                response.println(JSON.stringify(newOrder));
+                createUser(request.getJSON(), response);
             },
-
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
             }
         }]
     },
+
+    "user/createWithList": {
+        "post": [{
+            "serve": (_ctx, request, response) => {
+                body = request.getJSON();
+
+                body.forEach(elem => createUser(elem, response))
+            },
+            "catch": (_ctx, err, _request, response) => {
+                response.println(err);
+            }
+        }]
+    },
+
+    "user/login": { // Continue from here
+        "get": [{
+            "serve": (_ctx, request, response) => {
+                body = request.getJSON();
+
+                body.forEach(elem => createUser(elem, response))
+            },
+            "catch": (_ctx, err, _request, response) => {
+                response.println(err);
+            }
+        }]
+    },
+
+    "user/logout": {
+        "get": [{
+            "serve": (_ctx, request, response) => {
+                body = request.getJSON();
+
+                body.forEach(elem => createUser(elem, response))
+            },
+            "catch": (_ctx, err, _request, response) => {
+                response.println(err);
+            }
+        }]
+    },
+
+    "user/:username": {
+        "get": [{
+            "serve": (_ctx, request, response) => {
+                body = request.getJSON();
+
+                body.forEach(elem => createUser(elem, response))
+            },
+            "catch": (_ctx, err, _request, response) => {
+                response.println(err);
+            }
+        }],
+        "put": [{
+            "serve": (_ctx, request, response) => {
+                body = request.getJSON();
+
+                body.forEach(elem => createUser(elem, response))
+            },
+            "catch": (_ctx, err, _request, response) => {
+                response.println(err);
+            }
+        }],
+        "delete": [{
+            "serve": (_ctx, request, response) => {
+                body = request.getJSON();
+
+                body.forEach(elem => createUser(elem, response))
+            },
+            "catch": (_ctx, err, _request, response) => {
+                response.println(err);
+            }
+        }]
+    },
+
 }).execute();
+
+function createUser(body, response) {
+    ["username", "firstname", "lastname", "email", "password", "phone", "profileUrl", "userStatus"].forEach(elem => {
+        if (!(elem in body)) {
+            response.setStatus(400);
+            return;
+        }
+    });
+
+    body.userStatusId = userStatuses.indexOf(body.userStatus);
+
+    if (body.userStatusId == -1) {
+        response.println("userStatus is incorrect!")
+        response.setStatus(400);
+        return;
+    }
+
+    const user = daoUsers.get(daoUsers.create(body));
+
+    if (!user) {
+        response.println("User was not created!")
+        response.setStatus(500);
+        return;
+    }
+
+    if (!isValidUrl(body.profileUrl)) {
+        response.println("Invalid profileUrl");
+        response.setStatus(400);
+        return;
+    }
+
+    newOreder = daoUsers.get(daoUsers.create(body));
+
+    if (!newOrder) {
+        response.println("Could not create the order");
+        response.setStatus(500);
+        return;
+    }
+
+    response.setStatus(200);
+    response.println(JSON.stringify(newOrder));
+}
