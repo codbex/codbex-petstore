@@ -3,14 +3,16 @@ const http = require("http/rs");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
 const daoImg = require("codbex-petstore/gen/dao/Entities/photoUrl.js");
 const daoTag = require("codbex-petstore/gen/dao/Entities/tag.js");
+const daoPetStatus = require("codbex-petstore/gen/dao/entities/petStatus.js");
+const daoPetCategory = require("codbex-petstore/gen/dao/entities/petCategory.js");
 
-const petCategories = [
-    'Dog', 'Cat', 'Parakeet', 'Canary', 'Fish', 'Hamster', 'Guinea Pig', 'Rabbit', 'Snake',
-    'Turtle', 'Lizard', 'Gecko', 'Ferret', 'Mouse', 'Rat', 'Hedgehog', 'Gerbil', 'Chinchilla',
-    'Tarantula', 'Hermit Crab'
-];
+const categoryList = daoPetStatus.list();
+const petCategory = [];
+categoryList.forEach(elem => { petCategory.push(elem.name) });
 
-const petStatus = ['available', 'pending', 'sold'];
+const statusList = daoPetStatus.list();
+const petStatus = [];
+statusList.forEach(elem => { petStatus.push(elem.name) });
 
 const isValidUrl = (urlString) => {
     var urlPattern = new RegExp(
@@ -71,7 +73,8 @@ http.service({
                     }
                 });
 
-                body.petCategoryId = petCategories.indexOf(body.category);
+                body.petCategoryId = petCategory.indexOf(body.category);
+
                 if (body.petCategoryId == -1) {
                     response.println("Invalid Category");
                     response.setStatus(400);
@@ -139,7 +142,7 @@ http.service({
                     }
                 });
 
-                if (!petCategories.includes(body.category)) {
+                if (!petCategory.includes(body.category)) {
                     response.setStatus(400);
                     response.println("Invalid category");
                     return;
