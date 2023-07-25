@@ -82,5 +82,5 @@ exports.customDataCount = function() {
 };
 
 function triggerEvent(operation, data) {
-	producer.queue("codbex-petstore/entities/petstatus/" + operation).send(JSON.stringify(data));
+	producer.queue("codbex-petstore/entities/petStatus/" + operation).send(JSON.stringify(data));
 }

@@ -32,7 +32,7 @@
             angular.module('app', ['ngResource', 'ideLayout', 'ideUI'])
                 .constant('branding', {
                     name: 'CODBEX - Petstore',
-                    brand: 'CODBEX',
+                    brand: 'codbex',
                     brandUrl: 'https://www.codbex.com',
                     icons: {
                         faviconIco: '/services/web/resources/images/favicon.ico',
@@ -49,7 +49,7 @@
                 .controller('ApplicationController', ["$scope", "messageHub", function ($scope, messageHub) {
 
                     $scope.layoutModel = {
-                        views: ['photoUrl', 'tag', 'petstatus', 'petCategory', 'orderStatus', 'userStatus']
+                        views: ['photoUrl', 'tag', 'petStatus', 'petCategory', 'orderStatus', 'userStatus']
                     };
 
                 }]);

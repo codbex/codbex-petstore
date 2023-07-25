@@ -54,7 +54,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Pet-details", {
 				action: "select",
 				entity: entity,
-				optionspetstatusid: $scope.optionspetstatusid,
+				optionspetStatusid: $scope.optionspetStatusid,
 				optionspetCategoryid: $scope.optionspetCategoryid,
 			});
 		};
@@ -64,7 +64,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Pet-details", {
 				action: "create",
 				entity: {},
-				optionspetstatusid: $scope.optionspetstatusid,
+				optionspetStatusid: $scope.optionspetStatusid,
 				optionspetCategoryid: $scope.optionspetCategoryid,
 			}, null, false);
 		};
@@ -73,7 +73,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Pet-details", {
 				action: "update",
 				entity: entity,
-				optionspetstatusid: $scope.optionspetstatusid,
+				optionspetStatusid: $scope.optionspetStatusid,
 				optionspetCategoryid: $scope.optionspetCategoryid,
 			}, null, false);
 		};
@@ -108,11 +108,11 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		};
 
 		//----------------Dropdowns-----------------//
-		$scope.optionspetstatusid = [];
+		$scope.optionspetStatusid = [];
 		$scope.optionspetCategoryid = [];
 
-		$http.get("/services/js/codbex-petstore/gen/api/entities/petstatus.js").then(function (response) {
-			$scope.optionspetstatusid = response.data.map(e => {
+		$http.get("/services/js/codbex-petstore/gen/api/entities/petStatus.js").then(function (response) {
+			$scope.optionspetStatusid = response.data.map(e => {
 				return {
 					value: e.id,
 					text: e.name
@@ -128,10 +128,10 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 			});
 		});
-		$scope.optionspetstatusidValue = function (optionKey) {
-			for (let i = 0; i < $scope.optionspetstatusid.length; i++) {
-				if ($scope.optionspetstatusid[i].value === optionKey) {
-					return $scope.optionspetstatusid[i].text;
+		$scope.optionspetStatusidValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionspetStatusid.length; i++) {
+				if ($scope.optionspetStatusid[i].value === optionKey) {
+					return $scope.optionspetStatusid[i].text;
 				}
 			}
 			return null;

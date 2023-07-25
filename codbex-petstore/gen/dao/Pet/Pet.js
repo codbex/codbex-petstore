@@ -18,7 +18,7 @@ let dao = daoApi.create({
 			type: "VARCHAR",
 		},
  {
-			name: "petstatusid",
+			name: "petStatusid",
 			column: "PET_PETSTATUSID",
 			type: "INTEGER",
 		},

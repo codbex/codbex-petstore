@@ -28,7 +28,7 @@
 				<thead fd-table-header sticky="true">
 					<tr fd-table-row>
 						<th fd-table-header-cell>name</th>
-						<th fd-table-header-cell>petstatusid</th>
+						<th fd-table-header-cell>petStatusid</th>
 						<th fd-table-header-cell>petCategoryid</th>
 						<th fd-table-header-cell></th>
 					</tr>
@@ -41,7 +41,7 @@
 						dg-selected="next.id === selectedEntity.id" ng-click="selectEntity(next)">
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">{{next.name}}</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
-							{{optionspetstatusidValue(next.petstatusid)}}
+							{{optionspetStatusidValue(next.petStatusid)}}
 						</td>
 						<td fd-table-cell ng-click="openDetails(next)" hoverable="true" activable="true">
 							{{optionspetCategoryidValue(next.petCategoryid)}}

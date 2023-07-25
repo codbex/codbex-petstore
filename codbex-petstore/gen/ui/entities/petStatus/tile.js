@@ -6,9 +6,9 @@
 exports.getTile = function () {
     return {
         group: "entities",
-        name: "petstatus",
-        caption: "Manage entity petstatus",
-        tooltip: "petstatus",
+        name: "petStatus",
+        caption: "Manage entity petStatus",
+        tooltip: "petStatus",
         // icon: "file-o",
         location: "/services/web/codbex-petstore/gen/ui/entities/index.html",
         order: "100",

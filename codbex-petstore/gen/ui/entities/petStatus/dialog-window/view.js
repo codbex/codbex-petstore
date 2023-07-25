@@ -4,9 +4,9 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "petstatus-details",
-    label: "petstatus",
-    link: "/services/web/codbex-petstore/gen/ui/entities/petstatus/dialog-window/index.html"
+    id: "petStatus-details",
+    label: "petStatus",
+    link: "/services/web/codbex-petstore/gen/ui/entities/petStatus/dialog-window/index.html"
 };
 
 if (typeof exports !== 'undefined') {

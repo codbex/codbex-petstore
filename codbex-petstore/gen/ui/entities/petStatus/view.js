@@ -4,11 +4,11 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "petstatus",
-    label: "petstatus",
+    id: "petStatus",
+    label: "petStatus",
     factory: "frame",
     region: "center",
-    link: "/services/web/codbex-petstore/gen/ui/entities/petstatus/index.html",
+    link: "/services/web/codbex-petstore/gen/ui/entities/petStatus/index.html",
 };
 
 if (typeof exports !== 'undefined') {

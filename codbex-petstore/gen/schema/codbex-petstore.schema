@@ -292,7 +292,7 @@
                 ]
             },
             {
-                "name": "CODBEX_ORDERSTATUS",
+                "name": "CODBEX_USERSTATUS",
                 "type": "TABLE",
                 "columns": [
                     {
@@ -301,21 +301,21 @@
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
-                        "name": "ORDERSTATUS_ID"
+                        "name": "USERSTATUS_ID"
                     },
                     {
                         "type": "VARCHAR",
                         "length": 20,
                         "nullable": true,
-                        "name": "ORDERSTATUS_NAME"
+                        "name": "USERSTATUS_NAME"
                     }
                 ]
             },
             {
-                "name": "Pet_petstatus",
+                "name": "Pet_petStatus",
                 "type": "foreignKey",
                 "table": "CODBEX_PET",
-                "constraintName": "Pet_petstatus",
+                "constraintName": "Pet_petStatus",
                 "columns": "PET_PETSTATUSID",
                 "referencedTable": "CODBEX_PETSTATUS",
                 "referencedColumns": "PETSTATUS_ID"
@@ -362,8 +362,8 @@
                 "table": "CODBEX_USERS",
                 "constraintName": "Users_userStatus",
                 "columns": "USERS_USERSTATUSID",
-                "referencedTable": "CODBEX_ORDERSTATUS",
-                "referencedColumns": "ORDERSTATUS_ID"
+                "referencedTable": "CODBEX_USERSTATUS",
+                "referencedColumns": "USERSTATUS_ID"
             },
             {
                 "name": "photoUrl_Pet",

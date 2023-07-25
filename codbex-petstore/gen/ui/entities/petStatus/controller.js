@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-petstore.entities.petstatus';
+		messageHubProvider.eventIdPrefix = 'codbex-petstore.entities.petStatus';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/api/entities/petstatus.js";
+		entityApiProvider.baseUrl = "/services/js/codbex-petstore/gen/api/entities/petStatus.js";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', function ($scope, messageHub, entityApi) {
 
@@ -28,7 +28,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.dataPage = pageNumber;
 			entityApi.count().then(function (response) {
 				if (response.status != 200) {
-					messageHub.showAlertError("petstatus", `Unable to count petstatus: '${response.message}'`);
+					messageHub.showAlertError("petStatus", `Unable to count petStatus: '${response.message}'`);
 					return;
 				}
 				$scope.dataCount = response.data;
@@ -36,7 +36,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				let limit = $scope.dataLimit;
 				entityApi.list(offset, limit).then(function (response) {
 					if (response.status != 200) {
-						messageHub.showAlertError("petstatus", `Unable to list petstatus: '${response.message}'`);
+						messageHub.showAlertError("petStatus", `Unable to list petStatus: '${response.message}'`);
 						return;
 					}
 					$scope.data = response.data;
@@ -51,7 +51,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 		$scope.openDetails = function (entity) {
 			$scope.selectedEntity = entity;
-			messageHub.showDialogWindow("petstatus-details", {
+			messageHub.showDialogWindow("petStatus-details", {
 				action: "select",
 				entity: entity,
 			});
@@ -59,14 +59,14 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 		$scope.createEntity = function () {
 			$scope.selectedEntity = null;
-			messageHub.showDialogWindow("petstatus-details", {
+			messageHub.showDialogWindow("petStatus-details", {
 				action: "create",
 				entity: {},
 			}, null, false);
 		};
 
 		$scope.updateEntity = function (entity) {
-			messageHub.showDialogWindow("petstatus-details", {
+			messageHub.showDialogWindow("petStatus-details", {
 				action: "update",
 				entity: entity,
 			}, null, false);
@@ -75,8 +75,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.deleteEntity = function (entity) {
 			let id = entity.id;
 			messageHub.showDialogAsync(
-				'Delete petstatus?',
-				`Are you sure you want to delete petstatus? This action cannot be undone.`,
+				'Delete petStatus?',
+				`Are you sure you want to delete petStatus? This action cannot be undone.`,
 				[{
 					id: "delete-btn-yes",
 					type: "emphasized",
@@ -91,7 +91,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				if (msg.data === "delete-btn-yes") {
 					entityApi.delete(id).then(function (response) {
 						if (response.status != 204) {
-							messageHub.showAlertError("petstatus", `Unable to delete petstatus: '${response.message}'`);
+							messageHub.showAlertError("petStatus", `Unable to delete petStatus: '${response.message}'`);
 							return;
 						}
 						$scope.loadPage($scope.dataPage);
