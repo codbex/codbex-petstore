@@ -2,24 +2,30 @@ const http = require("http/rs");
 
 const daoStore = require("codbex-petstore/gen/dao/Store/Store.js");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
-const daoUser = require("codbex-petstore/gen/dao/Users/Users.js")
+const daoUser = require("codbex-petstore/gen/dao/Users/Users.js");
+const daoPetStatus = require("codbex-petstore/gen/dao/entities/petStatus.js");
+const daoOrderStatus = require("codbex-petstore/gen/dao/entities/orderStatus.js");
+
+const orderList = daoOrderStatus.list();
+const orderStatus = [];
+orderList.forEach(elem => { orderStatus.push(elem.name) });
+
+const petList = daoPetStatus.list();
+const petStatus = [];
+petList.forEach(elem => { petStatus.push(elem.name) });
+
+console.log(daoOrderStatus.list()[0].name);
 
 function isValidDate(dateString) {
 	const dateObj = new Date(dateString);
 	return dateObj instanceof Date;
 }
 
-const orderStatus = ['placed', 'delivered'];
-
-const petStatus = ['available', 'pending', 'sold'];
-
 http.service({
 	"store/order": {
 		"post": [{
 			"serve": (_ctx, request, response) => {
 				const body = request.getJSON();
-
-				//response.println(body.petId);
 
 				["petId", "quantity", "shipDate", "orderStatus", "userId"].forEach(elem => {
 					if (!(elem in body)) {
@@ -57,13 +63,15 @@ http.service({
 					return;
 				}
 
-				if (!orderStatus.includes(body.orderStatus)) {
+				response.println(orderStatus[0].name + "orer");
+
+				body.orderStatusid = orderStatus.indexOf(body.orderStatus);
+
+				if (body.orderStatusid == -1) {
 					response.println("Invalid Status");
 					response.setStatus(400);
 					return;
 				}
-
-				body.orderStatusid = orderStatus.indexOf(body.orderStatus);
 
 				const newOrder = daoStore.get(daoStore.create(body));
 
