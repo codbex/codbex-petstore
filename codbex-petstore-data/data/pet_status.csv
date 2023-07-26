@@ -1,4 +1,5 @@
-PETSTATUS_ID, PETSTATUS_NAME
-0, pending
-1, avaliable
-2, sold
+PETSTATUS_ID,PETSTATUS_NAME
+"0","pending"
+"1","avaliable"
+"2", "sold"
+"3", "test"

@@ -1,5 +1,5 @@
 ORDERSTATUS_ID,ORDERSTATUS_NAME
-0, available
-1, pending
-2, sold
+"0","available"
+"1","pending"
+"2","sold"
 
