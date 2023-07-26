@@ -145,10 +145,10 @@ http.service({
 				let map = {};
 
 				petStatus.forEach((status) => {
-					map[status] = 0;
+					map[status] = 0; //TODO: Ask is this hilighting an issue?
 
 					allPets.forEach((pet) => {
-						if (pet.status === status) {
+						if (petStatus[pet.petStatusid] === status) {
 							map[status]++;
 						}
 					})
