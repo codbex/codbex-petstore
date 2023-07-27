@@ -1,5 +1,4 @@
-const http = require("http/rs");
-
+import { rs } from "@dirigible/http"
 const daoStore = require("codbex-petstore/gen/dao/Store/Store.js");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
 const daoUser = require("codbex-petstore/gen/dao/Users/Users.js");
@@ -21,7 +20,7 @@ function isValidDate(dateString) {
 	return dateObj instanceof Date;
 }
 
-http.service({
+rs.service({
 	"store/order": {
 		"post": [{
 			"serve": (_ctx, request, response) => {
@@ -62,8 +61,6 @@ http.service({
 					response.setStatus(400);
 					return;
 				}
-
-				response.println(orderStatus[0].name + "orer");
 
 				body.orderStatusid = orderStatus.indexOf(body.orderStatus);
 
