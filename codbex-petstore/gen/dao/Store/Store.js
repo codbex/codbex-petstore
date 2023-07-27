@@ -13,55 +13,55 @@ let dao = daoApi.create({
 			id: true,
 			autoIncrement: true,
 		},
- {
+		{
 			name: "quantity",
 			column: "STORE_QUANTITY",
 			type: "INTEGER",
 		},
- {
+		{
 			name: "petId",
 			column: "STORE_PETID",
 			type: "INTEGER",
 		},
- {
+		{
 			name: "shipDate",
 			column: "STORE_SHIPDATE",
 			type: "DATE",
 		},
- {
+		{
 			name: "complete",
 			column: "STORE_COMPLETE",
 			type: "BOOLEAN",
 		},
- {
+		{
 			name: "userId",
 			column: "STORE_USERID",
 			type: "INTEGER",
 		},
- {
+		{
 			name: "orderStatusid",
 			column: "STORE_ORDERSTATUSID",
 			type: "INTEGER",
 		}
-]
+	]
 });
 
-exports.list = function(settings) {
-	return dao.list(settings).map(function(e) {
+exports.list = function (settings) {
+	return dao.list(settings).map(function (e) {
 		EntityUtils.setDate(e, "shipDate");
 		EntityUtils.setBoolean(e, "complete");
 		return e;
 	});
 };
 
-exports.get = function(id) {
+exports.get = function (id) {
 	let entity = dao.find(id);
-	EntityUtils.setDate(entity, "shipDate");
-	EntityUtils.setBoolean(entity, "complete");
+	// EntityUtils.setDate(entity, "shipDate");
+	// EntityUtils.setBoolean(entity, "complete");
 	return entity;
 };
 
-exports.create = function(entity) {
+exports.create = function (entity) {
 	EntityUtils.setLocalDate(entity, "shipDate");
 	EntityUtils.setBoolean(entity, "complete");
 	let id = dao.insert(entity);
@@ -76,7 +76,7 @@ exports.create = function(entity) {
 	return id;
 };
 
-exports.update = function(entity) {
+exports.update = function (entity) {
 	// EntityUtils.setLocalDate(entity, "shipDate");
 	EntityUtils.setBoolean(entity, "complete");
 	dao.update(entity);
@@ -90,7 +90,7 @@ exports.update = function(entity) {
 	});
 };
 
-exports.delete = function(id) {
+exports.delete = function (id) {
 	dao.remove(id);
 	triggerEvent("Delete", {
 		table: "CODBEX_STORE",
@@ -102,11 +102,11 @@ exports.delete = function(id) {
 	});
 };
 
-exports.count = function() {
+exports.count = function () {
 	return dao.count();
 };
 
-exports.customDataCount = function() {
+exports.customDataCount = function () {
 	let resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_STORE"');
 	if (resultSet !== null && resultSet[0] !== null) {
 		if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {

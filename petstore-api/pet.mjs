@@ -1,12 +1,12 @@
-const http = require("http/rs");
+import { rs } from "@dirigible/http"
 
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
-const daoImg = require("codbex-petstore/gen/dao/Entities/photoUrl.js");
-const daoTag = require("codbex-petstore/gen/dao/Entities/tag.js");
+const daoImg = require("codbex-petstore/gen/dao/entities/photoUrl.js");
+const daoTag = require("codbex-petstore/gen/dao/entities/tag.js");
 const daoPetStatus = require("codbex-petstore/gen/dao/entities/petStatus.js");
 const daoPetCategory = require("codbex-petstore/gen/dao/entities/petCategory.js");
 
-const categoryList = daoPetStatus.list();
+const categoryList = daoPetCategory.list();
 const petCategory = [];
 categoryList.forEach(elem => { petCategory.push(elem.name) });
 
@@ -27,7 +27,7 @@ const isValidUrl = (urlString) => {
     return !!urlPattern.test(urlString);
 };
 
-http.service({
+rs.service({
     "pet/:petId/uploadImage": {
         "post": [{
             "serve": (_ctx, request, response) => {
@@ -38,22 +38,29 @@ http.service({
                 ["id", "imageUrl"].forEach(elem => {
                     if (!(elem in body)) {
                         response.setStatus(400);
+                        response.println("Required more parameters");
                         return;
                     }
                 });
 
                 if (!daoPet.get(body.id)) {
                     response.setStatus(404);
+                    response.println("Pet not found!");
                     return;
                 }
 
                 if (!isValidUrl(body.imageUrl)) {
                     response.setStatus(400);
+                    response.println("Invalid ImageUrl!");
                     return;
                 }
 
-                daoImg.create(body.id, body.imageUrl);
-                response.setStatus(200);
+                const newImg = daoImg.create(body);
+
+                if (!daoImg.get(newImg)) {
+                    response.println("Failed image creation!");
+                    response.setStatus(400);
+                }
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -73,16 +80,17 @@ http.service({
                     }
                 });
 
-                body.petCategoryId = petCategory.indexOf(body.category);
+                body.petCategoryid = petCategory.indexOf(body.category);
 
-                if (body.petCategoryId == -1) {
+                if (body.petCategoryid == -1) {
                     response.println("Invalid Category");
                     response.setStatus(400);
                     return;
                 }
 
-                body.petstatusid = petStatus.indexOf(body.status); //TODO petSStatus
-                if (body.petstatusid == -1) {
+                body.petStatusid = petStatus.indexOf(body.status);
+
+                if (body.petStatusid == -1) {
                     response.println("Invalid status");
                     response.setStatus(400);
                     return;
@@ -142,19 +150,23 @@ http.service({
                     }
                 });
 
-                if (!petCategory.includes(body.category)) {
+                body.petCategoryid = petCategory.indexOf(body.category);
+
+                if (body.petCategoryid == -1) {
+                    response.println("Invalid Category");
                     response.setStatus(400);
-                    response.println("Invalid category");
                     return;
                 }
 
-                if (!petStatus.includes(body.status)) {
-                    response.setStatus(400);
+                body.petStatusid = petStatus.indexOf(body.status);
+
+                if (body.petStatusid == -1) {
                     response.println("Invalid status");
+                    response.setStatus(400);
                     return;
                 }
 
-                urlList = daoImg.list();
+                const urlList = daoImg.list();
 
                 urlList.forEach((url) => {
                     if (url.petid === body.id) {
@@ -162,7 +174,7 @@ http.service({
                     }
                 });
 
-                tagList = daoTag.list();
+                const tagList = daoTag.list();
 
                 tagList.forEach((tag) => {
                     if (tag.petid === body.id) {
@@ -178,22 +190,36 @@ http.service({
 
                 daoPet.update(body);
 
-                body.imageUrl.forEach((url) => {
-                    if (!isValidUrl(url)) {
+                try {
+                    body.imageUrl.forEach((url) => {
+                        if (!isValidUrl(url)) {
+                            response.println("Invalid Url");
+                            response.setStatus(400);
+                            return;
+                        } else {
+                            daoImg.create(body.id, url);
+                        }
+                    });
+                } catch (e) {
+                    if (!isValidUrl(body.imageUrl)) {
+                        response.println("Invalid Url\n" + e);
                         response.setStatus(400);
-                        response.println("Invalid image url");
                         return;
                     } else {
-                        daoImg.create(updatedPet.id, url);
+                        daoImg.create(body.id, body.imageUrl);
                     }
-                });
+                }
 
-                body.tags.forEach((tag) => {
-                    daoTag.create(updatedPet.id, tag);
-                });
+                try {
+                    body.tags.forEach((tag) => {
+                        daoTag.create(body.id, tag);
+                    });
+                } catch {
+                    daoTag.create(body.id, body.tags);
+                }
 
                 response.setStatus(200);
-                response.println(JSON.stringify(updatedPet));
+                response.println(JSON.stringify(daoPet.get(body.id)));
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
