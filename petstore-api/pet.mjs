@@ -55,7 +55,7 @@ rs.service({
                     return;
                 }
 
-                const newImg = daoImg.create(body);
+                const newImg = daoImg.create({ Petid: body.id, url: body.imageUrl });
 
                 if (!daoImg.get(newImg)) {
                     response.println("Failed image creation!");
@@ -111,7 +111,7 @@ rs.service({
                             response.setStatus(400);
                             return;
                         } else {
-                            daoImg.create(newPet.id, url);
+                            daoImg.create({ Petid: newPet.id, url: url });
                         }
                     });
                 } catch (e) {
@@ -120,16 +120,16 @@ rs.service({
                         response.setStatus(400);
                         return;
                     } else {
-                        daoImg.create(newPet.id, body.imageUrl);
+                        daoImg.create({ Petid: newPet.id, url: body.imageUrl });
                     }
                 }
 
                 try {
                     body.tags.forEach((tag) => {
-                        daoTag.create(newPet.id, tag);
+                        daoTag.create({ Petid: newPet.id, tag: tag });
                     });
                 } catch {
-                    daoTag.create(newPet.id, body.tags);
+                    daoTag.create({ Petid: newPet.id, tag: body.tags });
                 }
 
                 response.setStatus(201)
@@ -233,11 +233,13 @@ rs.service({
                 const body = request.getJSON();
                 if (!body.status) {
                     response.setStatus(400);
+                    response.println("Status required!");
                     return;
                 }
 
                 if (!petStatus.includes(body.status)) {
                     response.setStatus(400);
+                    response.println("Invalid status!");
                     return;
                 }
 
@@ -245,9 +247,15 @@ rs.service({
 
                 const allPets = daoPet.list();
 
-                const petsWithStatus = allPets.filter(pet => pet.status === status);
+                const statusPets = [];
 
-                response.println(JSON.stringify(petsWithStatus));
+                allPets.forEach((pet) => {
+                    if (petStatus[pet.petStatusid] === status) {
+                        statusPets.push(pet);
+                    }
+                });
+
+                response.println(JSON.stringify(statusPets));
                 response.setStatus(200);
             },
             "catch": (_ctx, err, _request, response) => {
@@ -286,13 +294,15 @@ rs.service({
                     }
                 });
 
-                if (!petStatus.includes(body.status)) {
-                    response.setStatus(400);
+                body.petStatusid = petStatus.indexOf(body.status);
+
+                if (body.petStatusid == -1) {
                     response.println("Invalid status");
+                    response.setStatus(400);
                     return;
                 }
 
-                if (daoPet.get(body.id)) {
+                if (!daoPet.get(body.id)) {
                     response.setStatus(404);
                     response.println("Pet not found");
                     return;
@@ -301,7 +311,7 @@ rs.service({
                 daoPet.update(body);
 
                 response.setStatus(200)
-                response.println(JSON.stringify(updatedPet));
+                response.println(JSON.stringify(daoPet.get(body.id)));
 
             },
             "catch": (_ctx, err, _request, response) => {
