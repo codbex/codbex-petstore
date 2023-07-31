@@ -1,49 +1,17 @@
 {
   "swagger": "2.0",
-  "info": {
-    "title": "Swagger Petstore - OpenAPI 3.0",
-    "description": "This is a sample Pet Store Server based on the OpenAPI 3.0 specification. You can find out more about Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach! You can now help us improve the API whether it's by making changes to the definition itself or to the code. That way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\n_If you're looking for the Swagger 2.0/OAS 2.0 version of Petstore, then click [here](https://editor.swagger.io/?url=https://petstore.swagger.io/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Petstore OAS 2.0` menu option!_\n\nSome useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": {
-      "email": "apiteam@swagger.io"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    },
-    "version": "1.0.11",
-    "externalDocs": {
-      "description": "Find out more about Swagger",
-      "url": "http://swagger.io"
-    }
-  },
-  "servers": [
-    {
-      "url": "https://petstore3.swagger.io/api/v3"
-    },
-    {
-      "url": "http://dirigible.swagger.io/api"
-    }
-  ],
+  
   "tags": [
     {
-      "name": "pet",
-      "description": "Everything about your Pets",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
+      "name": "pet.mjs",
+      "description": "Everything about your Pets"
     },
     {
-      "name": "store",
-      "description": "Access to Petstore orders",
-      "externalDocs": {
-        "description": "Find out more about our store",
-        "url": "http://swagger.io"
-      }
+      "name": "store.mjs",
+      "description": "Access to Petstore orders"
     },
     {
-      "name": "user",
+      "name": "user.mjs",
       "description": "Operations about user"
     }
   ],
@@ -51,7 +19,7 @@
     "/pet": {
       "put": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Update an existing pet",
         "description": "Update an existing pet by Id",
@@ -114,7 +82,7 @@
       },
       "post": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Add a new pet to the store",
         "description": "Add a new pet to the store",
@@ -173,7 +141,7 @@
     "/pet/findByStatus": {
       "get": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Finds Pets by status",
         "description": "Multiple status values can be provided with comma separated strings",
@@ -235,7 +203,7 @@
     "/pet/findByTags": {
       "get": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Finds Pets by tags",
         "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
@@ -294,7 +262,7 @@
     "/pet/{petId}": {
       "get": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Find pet by ID",
         "description": "Returns a single pet",
@@ -348,7 +316,7 @@
       },
       "post": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Updates a pet in the store with form data",
         "description": "",
@@ -397,7 +365,7 @@
       },
       "delete": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "Deletes a pet",
         "description": "delete a pet",
@@ -441,7 +409,7 @@
     "/pet/{petId}/uploadImage": {
       "post": {
         "tags": [
-          "pet"
+          "pet.mjs"
         ],
         "summary": "uploads an image",
         "description": "",
@@ -502,7 +470,7 @@
     "/store/inventory": {
       "get": {
         "tags": [
-          "store"
+          "store.mjs"
         ],
         "summary": "Returns pet inventories by status",
         "description": "Returns a map of status codes to quantities",
@@ -533,7 +501,7 @@
     "/store/order": {
       "post": {
         "tags": [
-          "store"
+          "store.mjs"
         ],
         "summary": "Place an order for a pet",
         "description": "Place a new order in the store",
@@ -577,7 +545,7 @@
     "/store/order/{orderId}": {
       "get": {
         "tags": [
-          "store"
+          "store.mjs"
         ],
         "summary": "Find purchase order by ID",
         "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.",
@@ -620,7 +588,7 @@
       },
       "delete": {
         "tags": [
-          "store"
+          "store.mjs"
         ],
         "summary": "Delete purchase order by ID",
         "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
@@ -650,7 +618,7 @@
     "/user": {
       "post": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Create user",
         "description": "This can only be done by the logged in user.",
@@ -697,7 +665,7 @@
     "/user/createWithList": {
       "post": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Creates list of users with given input array",
         "description": "Creates list of users with given input array",
@@ -739,7 +707,7 @@
     "/user/login": {
       "get": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Logs user into the system",
         "description": "",
@@ -805,7 +773,7 @@
     "/user/logout": {
       "get": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Logs out current logged in user session",
         "description": "",
@@ -820,7 +788,7 @@
     "/user/{username}": {
       "get": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Get user by user name",
         "description": "",
@@ -862,7 +830,7 @@
       },
       "put": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Updated user",
         "description": "This can only be done by the logged in user.",
@@ -909,7 +877,7 @@
       },
       "delete": {
         "tags": [
-          "user"
+          "user.mjs"
         ],
         "summary": "Delete user",
         "description": "This can only be done by the logged in user.",
