@@ -39,33 +39,7 @@ rs.service({
     "user/createWithList": {
         "post": [{
             "serve": (_ctx, request, response) => {
-                body = request.getJSON();
-
-                body.forEach(elem => createUser(elem, response))
-            },
-            "catch": (_ctx, err, _request, response) => {
-                response.println(err);
-            }
-        }]
-    },
-
-    "user/login": { // Continue from here
-        "get": [{
-            "serve": (_ctx, request, response) => {
-                body = request.getJSON();
-
-                body.forEach(elem => createUser(elem, response))
-            },
-            "catch": (_ctx, err, _request, response) => {
-                response.println(err);
-            }
-        }]
-    },
-
-    "user/logout": {
-        "get": [{
-            "serve": (_ctx, request, response) => {
-                body = request.getJSON();
+                let body = request.getJSON();
 
                 body.forEach(elem => createUser(elem, response))
             },
@@ -77,43 +51,44 @@ rs.service({
 
     "user/:username": {
         "get": [{
-            "serve": (_ctx, _request, response) => {
+            "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
                 let script = sql.getDialect().select()
-                    .where("USERS_USERNAME").column("USERS_FIRSTNAME")
-                    .column("USERS_LASTNAME").column("USERS_EMAIL")
-                    .column("USERS_PHONE")
+                    .column("USERS_FIRSTNAME").column("USERS_LASTNAME")
+                    .column("USERS_EMAIL").column("USERS_PHONE")
                     .column("USERS_PROFILEURL").column("USERS_USERSTATUSID")
-                    .from("CODBEX_USERS").where(`USERS_USERNAME=${body.username}`).build();
+                    .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
-                let result = connection.prepareStatement(script).executeQuery().next();
-                let user = {
-                    username: result.getString("USERS_USERNAME"),
-                    firstname: result.getString("USERS_FIRSTNAME"),
-                    lastname: result.getString("USERS_LASTNAME"),
-                    email: result.getString("USERS_EMAIL"),
-                    phone: result.getString("USERS_PHONE"),
-                    profileUrl: result.getString("USERS_PROFILEURL"),
-                    userStatusid: result.getDate("USERS_USERSTATUSID").toISOString(),
-                };
+                let result = connection.prepareStatement(script).executeQuery().toJson(true);
+                // let user = {
+                //     username: result.getString("USERS_USERNAME"),
+                //     firstname: result.getString("USERS_FIRSTNAME"),
+                //     lastname: result.getString("USERS_LASTNAME"),
+                //     email: result.getString("USERS_EMAIL"),
+                //     phone: result.getString("USERS_PHONE"),
+                //     profileUrl: result.getString("USERS_PROFILEURL"),
+                //     userStatusid: result.getDate("USERS_USERSTATUSID").toISOString(),
+                // };
 
                 response.println(JSON.stringify(result))
                 response.println("\n\n")
-                response.println(JSON.stringify(user))
+                connection.close();
+                // response.println(JSON.stringify(user))
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
+                connection.close();
             }
         }],
         "put": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
-                body = request.params.username;
+                let body = request.params.username;
                 let script = sql.getDialect().update()
                     .set("USERS_USERNAME", body.username).set("USERS_FIRSTNAME", body.firstname)
                     .set("USERS_LASTNAME", body.lastname).set("USERS_PHONE", body.phone)
                     .set("USERS_PROFILEURL", body.profileUrl).set("USERS_USERSTATUSID", body.userStatusid)
-                    .table("CODBEX_USERS").where(`USERS_USERNAME=${body.username}`).build();
+                    .table("CODBEX_USERS").where(`USERS_USERNAME=${request.params.username}`).build();
 
                 let result = connection.prepareStatement(script).executeQuery().next();
 
@@ -129,9 +104,9 @@ rs.service({
         "delete": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
-                body = request.params.username;
+                let body = request.params.username;
                 let script = sql.getDialect().delete()
-                    .from("CODBEX_USERS").where(`USERS_USERNAME=${body.username}`).build();
+                    .from("CODBEX_USERS").where(`USERS_USERNAME=${request.params.username}`).build();
 
                 let result = connection.prepareStatement(script).executeQuery().next();
 
