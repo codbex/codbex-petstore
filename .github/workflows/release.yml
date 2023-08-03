@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: Release Version
+        required: true
+        default: 1.0.0
+    
+run-name: 'version set to ${{ github.event.inputs.releaseVersion }} for release'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Build and Push Docker Image
+      run: |
+        docker buildx create --name codbex-builder
+        docker buildx use codbex-builder
+        docker buildx build --tag codbex-petstore -o type=image --platform=linux/arm64,linux/amd64 .
+        docker login ghcr.io -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        docker buildx build --push --tag ghcr.io/codbex/codbex-petstore:${{ github.event.inputs.releaseVersion }} -o type=image --platform=linux/arm64,linux/amd64 .
+
+    - name: "Create Release"
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: v${{ github.event.inputs.releaseVersion }}
+        name: ${{ github.event.inputs.releaseVersion }}
+        draft: false
+        prerelease: false
+        files: |
+          LICENSE
+        body: |
+          ## codbex-aion - ${{ github.event.inputs.releaseVersion }}
+
+          Timesheets Management Application
+
+          ## Deployment
+
+          ```
+          docker run --name codbex-petstore \
+          --rm -p 8080:8080 -p 8081:8081 \
+          ghcr.io/codbex/codbex-petstore:${{ github.event.inputs.releaseVersion }}
+          ```
+
+          ## Access points:
+
+          - [{host}/services/web/ide/](http://localhost:8080/services/web/ide/) - Web IDE
+          - [{host}/services/web/codbex-petstore/gen/](http://localhost:8080/services/web/codbex-petstore/gen/) - Admin Panel
