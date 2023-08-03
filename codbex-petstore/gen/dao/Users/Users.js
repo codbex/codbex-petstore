@@ -16,6 +16,7 @@ let dao = daoApi.create({
 			name: "username",
 			column: "USERS_USERNAME",
 			type: "VARCHAR",
+			required: true
 		},
  {
 			name: "firstname",

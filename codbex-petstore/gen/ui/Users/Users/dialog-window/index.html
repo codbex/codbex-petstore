@@ -17,6 +17,7 @@
     </head>
 
     <body class="dg-vbox" dg-contextmenu="contextMenuContent">
+
         <fd-scrollbar class="dg-full-height">
             <div class="fd-margin--md fd-message-strip fd-message-strip--error fd-message-strip--dismissible"
                 role="alert" ng-show="errorMessage">
@@ -28,12 +29,12 @@
             <fd-fieldset class="fd-margin--md" ng-form="formFieldset">
                 <fd-form-group dg-header="{{formHeaders[action]}}" name="entityForm">
                     <fd-form-item horizontal="false">
-                        <fd-form-label for="idusername" dg-required="false" dg-colon="true">username</fd-form-label>
+                        <fd-form-label for="idusername" dg-required="true" dg-colon="true">username</fd-form-label>
                         <fd-form-input-message-group dg-inactive="{{ formErrors.username ? false : true }}">
                             <fd-input id="idusername"
                                 name="username"
                                 state="{{ formErrors.username ? 'error' : '' }}"
-								ng-required="false"
+								ng-required="true"
                                 ng-change="isValid(formFieldset['username'].$valid, 'username')"
                                 ng-model="entity.username"
                                 ng-readonly="action === 'select'"

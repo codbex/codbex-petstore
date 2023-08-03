@@ -1,8 +1,14 @@
-const http = require("http/rs");
+import { rs } from "@dirigible/http";
+import { database, sql } from "@dirigible/db";
 
 const daoUsers = require("codbex-petstore/gen/dao/Users/Users.js");
+const daoUserStatus = require("codbex-petstore/gen/dao/entities/userStatus.js");
 
-const userStatuses = ["Anonynous", "Active", "Inactive", "Blocked"];
+// const userStatuses = ["Anonynous", "Active", "Inactive", "Blocked"];
+
+const userStatuses = [];
+const statusList = daoUserStatus.list();
+statusList.forEach(elem => { userStatuses.push(elem.name) });
 
 const isValidUrl = (urlString) => {
     var urlPattern = new RegExp(
@@ -17,9 +23,8 @@ const isValidUrl = (urlString) => {
     return !!urlPattern.test(urlString);
 };
 
-const userStatus = ["Anonynous", "Active", "Inactive", "Blocked"];
 
-http.service({
+rs.service({
     "user": {
         "post": [{
             "serve": (_ctx, request, response) => {
@@ -72,10 +77,29 @@ http.service({
 
     "user/:username": {
         "get": [{
-            "serve": (_ctx, request, response) => {
-                body = request.getJSON();
+            "serve": (_ctx, _request, response) => {
+                let connection = database.getConnection("DefaultDB");
+                let script = sql.getDialect().select()
+                    .where("USERS_USERNAME").column("USERS_FIRSTNAME")
+                    .column("USERS_LASTNAME").column("USERS_EMAIL")
+                    .column("USERS_PHONE")
+                    .column("USERS_PROFILEURL").column("USERS_USERSTATUSID")
+                    .from("CODBEX_USERS").where(`USERS_USERNAME=${body.username}`).build();
 
-                body.forEach(elem => createUser(elem, response))
+                let result = connection.prepareStatement(script).executeQuery().next();
+                let user = {
+                    username: result.getString("USERS_USERNAME"),
+                    firstname: result.getString("USERS_FIRSTNAME"),
+                    lastname: result.getString("USERS_LASTNAME"),
+                    email: result.getString("USERS_EMAIL"),
+                    phone: result.getString("USERS_PHONE"),
+                    profileUrl: result.getString("USERS_PROFILEURL"),
+                    userStatusid: result.getDate("USERS_USERSTATUSID").toISOString(),
+                };
+
+                response.println(JSON.stringify(result))
+                response.println("\n\n")
+                response.println(JSON.stringify(user))
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -83,9 +107,20 @@ http.service({
         }],
         "put": [{
             "serve": (_ctx, request, response) => {
-                body = request.getJSON();
+                let connection = database.getConnection("DefaultDB");
+                body = request.params.username;
+                let script = sql.getDialect().update()
+                    .set("USERS_USERNAME", body.username).set("USERS_FIRSTNAME", body.firstname)
+                    .set("USERS_LASTNAME", body.lastname).set("USERS_PHONE", body.phone)
+                    .set("USERS_PROFILEURL", body.profileUrl).set("USERS_USERSTATUSID", body.userStatusid)
+                    .table("CODBEX_USERS").where(`USERS_USERNAME=${body.username}`).build();
 
-                body.forEach(elem => createUser(elem, response))
+                let result = connection.prepareStatement(script).executeQuery().next();
+
+
+                response.println(JSON.stringify(result))
+                response.println("\n\n")
+                response.println(JSON.stringify(user))
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -93,9 +128,17 @@ http.service({
         }],
         "delete": [{
             "serve": (_ctx, request, response) => {
-                body = request.getJSON();
+                let connection = database.getConnection("DefaultDB");
+                body = request.params.username;
+                let script = sql.getDialect().delete()
+                    .from("CODBEX_USERS").where(`USERS_USERNAME=${body.username}`).build();
 
-                body.forEach(elem => createUser(elem, response))
+                let result = connection.prepareStatement(script).executeQuery().next();
+
+
+                response.println(JSON.stringify(result))
+                response.println("\n\n")
+                response.println(JSON.stringify(user))
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -105,6 +148,8 @@ http.service({
 
 }).execute();
 
+
+
 function createUser(body, response) {
     ["username", "firstname", "lastname", "email", "password", "phone", "profileUrl", "userStatus"].forEach(elem => {
         if (!(elem in body)) {
@@ -113,36 +158,29 @@ function createUser(body, response) {
         }
     });
 
-    body.userStatusId = userStatuses.indexOf(body.userStatus);
+    body.userStatusid = userStatuses.indexOf(body.userStatus);
 
-    if (body.userStatusId == -1) {
+    if (body.userStatusid == -1) {
         response.println("userStatus is incorrect!")
         response.setStatus(400);
         return;
     }
 
-    const user = daoUsers.get(daoUsers.create(body));
-
-    if (!user) {
-        response.println("User was not created!")
-        response.setStatus(500);
-        return;
-    }
 
     if (!isValidUrl(body.profileUrl)) {
-        response.println("Invalid profileUrl");
+        response.println("Invalid profileUrl -" + body.profileUrl);
         response.setStatus(400);
         return;
     }
 
-    newOreder = daoUsers.get(daoUsers.create(body));
+    let newUser = daoUsers.get(daoUsers.create(body));
 
-    if (!newOrder) {
-        response.println("Could not create the order");
+    if (!newUser) {
+        response.println("Could not create the user");
         response.setStatus(500);
         return;
     }
 
-    response.setStatus(200);
-    response.println(JSON.stringify(newOrder));
+    response.setStatus(201);
+    response.println(JSON.stringify(newUser));
 }

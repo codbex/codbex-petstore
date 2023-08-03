@@ -115,8 +115,9 @@
                     },
                     {
                         "type": "VARCHAR",
-                        "length": 20,
-                        "nullable": true,
+                        "length": 30,
+                        "precision": "NaN",
+                        "scale": "NaN",
                         "name": "USERS_USERNAME"
                     },
                     {
