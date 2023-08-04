@@ -99,19 +99,24 @@ rs.service({
         "put": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
-                let body = request.params.username;
-                let script = sql.getDialect().update()
-                    .set("USERS_USERNAME", body.username).set("USERS_FIRSTNAME", body.firstname)
-                    .set("USERS_LASTNAME", body.lastname).set("USERS_PHONE", body.phone)
-                    .set("USERS_PROFILEURL", body.profileUrl).set("USERS_USERSTATUSID", body.userStatusid)
-                    .table("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
+                let body = request.getJSON();
+                let scriptSQL = sql.getDialect().update();
 
-                let result = connection.prepareStatement(script).executeQuery().next();
+                if (body.username) scriptSQL.set("USERS_USERNAME", `'${body.username}'`)
+                if (body.firstname) scriptSQL.set("USERS_FIRSTNAME", `'${body.firstname}'`)
+                if (body.lastname) scriptSQL.set("USERS_LASTNAME", `'${body.lastname}'`)
+                if (body.phone) scriptSQL.set("USERS_PHONE", `'${body.phone}'`)
+                if (body.profileUrl) scriptSQL.set("USERS_PROFILEURL", `'${body.profileUrl}'`)
+                if (body.userStatusid) scriptSQL.set("USERS_USERSTATUSID", `'${body.userStatusid}'`)
 
 
-                response.println(JSON.stringify(result))
-                response.println("\n\n")
-                response.println(JSON.stringify(user))
+                let script = scriptSQL.table("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
+
+                connection.prepareStatement(script).executeUpdate();
+
+
+                response.setStatus(200)
+                response.println(err);
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -123,12 +128,9 @@ rs.service({
                 let script = sql.getDialect().delete()
                     .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
-                let result = connection.prepareStatement(script).executeQuery().next();
+                connection.prepareStatement(script).executeUpdate();
 
-
-                response.println(JSON.stringify(result))
-                response.println("\n\n")
-                response.println(JSON.stringify(user))
+                response.setStatus(204);
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
