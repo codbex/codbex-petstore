@@ -4,8 +4,6 @@ import { database, sql } from "@dirigible/db";
 const daoUsers = require("codbex-petstore/gen/dao/Users/Users.js");
 const daoUserStatus = require("codbex-petstore/gen/dao/entities/userStatus.js");
 
-// const userStatuses = ["Anonynous", "Active", "Inactive", "Blocked"];
-
 const userStatuses = [];
 const statusList = daoUserStatus.list();
 statusList.forEach(elem => { userStatuses.push(elem.name) });
@@ -54,9 +52,6 @@ rs.service({
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
                 let script = sql.getDialect().select()
-                    // .column("USERS_FIRSTNAME").column("USERS_LASTNAME")
-                    // .column("USERS_EMAIL").column("USERS_PHONE")
-                    // .column("USERS_PROFILEURL").column("USERS_USERSTATUSID")
                     .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
                 let result = connection.prepareStatement(script).executeQuery();
@@ -78,8 +73,10 @@ rs.service({
                     response.setStatus(404);
                     response.println("User Not Found!")
                 } else if (users.length == 1) {
+                    response.setContentType("application/json");
                     response.println(JSON.stringify(users[0]))
                 } else {
+                    response.setContentType("application/json");
                     response.println(JSON.stringify(users))
                 }
                 connection.close();
@@ -125,8 +122,8 @@ rs.service({
 
                 let result = connection.prepareStatement(script).executeUpdate();
 
-                // response.println(!!result);  ----- BUG???
                 response.setStatus(200)
+                connection.close();
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -142,8 +139,8 @@ rs.service({
                 let result = connection.prepareStatement(script).executeUpdate();
 
 
-                // response.println(!!result);
                 response.setStatus(204);
+                connection.close();
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -187,5 +184,6 @@ function createUser(body, response) {
     }
 
     response.setStatus(201);
+    response.setContentType("application/json");
     response.println(JSON.stringify(newUser));
 }
