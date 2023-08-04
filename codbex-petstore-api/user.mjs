@@ -102,14 +102,14 @@ rs.service({
                 }
 
                 let scriptSQL = sql.getDialect().update()
-                if (body.username) scriptSQL.set("USERS_USERNAME", body.username)
-                if (body.firstname) scriptSQL.set("USERS_FIRSTNAME", body.firstname)
-                if (body.lastname) scriptSQL.set("USERS_LASTNAME", body.lastname)
-                if (body.phone) scriptSQL.set("USERS_PHONE", body.phone)
-                if (body.profileUrl) scriptSQL.set("USERS_PROFILEURL", body.profileUrl)
+                if (body.username) scriptSQL.set("USERS_USERNAME", `'${body.username}'`)
+                if (body.firstname) scriptSQL.set("USERS_FIRSTNAME", `'${body.firstname}'`)
+                if (body.lastname) scriptSQL.set("USERS_LASTNAME", `'${body.lastname}'`)
+                if (body.phone) scriptSQL.set("USERS_PHONE", `'${body.phone}'`)
+                if (body.profileUrl) scriptSQL.set("USERS_PROFILEURL", `'${body.profileUrl}'`)
 
                 if (body.userStatus) {
-                    body.userStatusid = userStatuses.indexOf(body.userStatus);
+                    body.userStatusid = userStatuses.indexOf(body.userStatus).toString();
                     // get the statusid from a status
                     if (body.userStatusid == -1) {
                         response.println("userStatus is incorrect!")
@@ -117,7 +117,7 @@ rs.service({
                         return;
                     }
 
-                    scriptSQL.set("USERS_USERSTATUSID", body.userStatusid)
+                    scriptSQL.set("USERS_USERSTATUSID", `'${body.userStatusid}'`)
                 }
 
 
@@ -125,7 +125,7 @@ rs.service({
 
                 let result = connection.prepareStatement(script).executeUpdate();
 
-                response.println(!!result);
+                // response.println(!!result);  ----- BUG???
                 response.setStatus(200)
             },
             "catch": (_ctx, err, _request, response) => {
@@ -142,7 +142,7 @@ rs.service({
                 let result = connection.prepareStatement(script).executeUpdate();
 
 
-                response.println(!!result);
+                // response.println(!!result);
                 response.setStatus(204);
             },
             "catch": (_ctx, err, _request, response) => {
