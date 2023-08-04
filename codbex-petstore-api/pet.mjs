@@ -133,6 +133,7 @@ rs.service({
                 }
 
                 response.setStatus(201)
+                response.setContentType("application/json");
                 response.println(JSON.stringify(newPet));
             },
             "catch": (_ctx, err, _request, response) => {
@@ -219,6 +220,7 @@ rs.service({
                 }
 
                 response.setStatus(200);
+                response.setContentType("application/json");
                 response.println(JSON.stringify(daoPet.get(body.id)));
             },
             "catch": (_ctx, err, _request, response) => {
@@ -255,6 +257,7 @@ rs.service({
                     }
                 });
 
+                response.setContentType("application/json");
                 response.println(JSON.stringify(statusPets));
                 response.setStatus(200);
             },
@@ -275,6 +278,7 @@ rs.service({
                     return;
                 }
                 response.setStatus(200);
+                response.setContentType("application/json");
                 response.println(JSON.stringify(pet));
             },
             "catch": (_ctx, err, _request, response) => {
@@ -311,6 +315,7 @@ rs.service({
                 daoPet.update(body);
 
                 response.setStatus(200)
+                response.setContentType("application/json");
                 response.println(JSON.stringify(daoPet.get(body.id)));
 
             },

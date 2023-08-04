@@ -79,6 +79,7 @@ rs.service({
 				}
 
 				response.setStatus(200);
+				response.setContentType("application/json");
 				response.println(JSON.stringify(newOrder));
 			},
 
@@ -100,6 +101,7 @@ rs.service({
 				}
 
 				response.setStatus(200);
+				response.setContentType("application/json");
 				response.println(JSON.stringify(order));
 			},
 
@@ -142,7 +144,7 @@ rs.service({
 				let map = {};
 
 				petStatus.forEach((status) => {
-					map[status] = 0; //TODO: Ask is this hilighting an issue?
+					map[status] = 0;
 
 					allPets.forEach((pet) => {
 						if (petStatus[pet.petStatusid] === status) {
@@ -151,6 +153,7 @@ rs.service({
 					})
 				})
 
+				response.setContentType("application/json");
 				response.println(JSON.stringify(map));
 			},
 
