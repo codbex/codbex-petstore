@@ -24,6 +24,16 @@ const isValidUrl = (urlString) => {
 };
 
 
+
+const getMethods = (obj) => {
+    let properties = new Set()
+    let currentObj = obj
+    do {
+        Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
+    } while ((currentObj = Object.getPrototypeOf(currentObj)))
+    return [...properties.keys()].filter(item => typeof obj[item] === 'function')
+}
+
 rs.service({
     "user": {
         "post": [{
@@ -54,26 +64,32 @@ rs.service({
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
                 let script = sql.getDialect().select()
-                    .column("USERS_FIRSTNAME").column("USERS_LASTNAME")
-                    .column("USERS_EMAIL").column("USERS_PHONE")
-                    .column("USERS_PROFILEURL").column("USERS_USERSTATUSID")
+                    // .column("USERS_FIRSTNAME").column("USERS_LASTNAME")
+                    // .column("USERS_EMAIL").column("USERS_PHONE")
+                    // .column("USERS_PROFILEURL").column("USERS_USERSTATUSID")
                     .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
-                let result = connection.prepareStatement(script).executeQuery().toJson(true);
-                // let user = {
-                //     username: result.getString("USERS_USERNAME"),
-                //     firstname: result.getString("USERS_FIRSTNAME"),
-                //     lastname: result.getString("USERS_LASTNAME"),
-                //     email: result.getString("USERS_EMAIL"),
-                //     phone: result.getString("USERS_PHONE"),
-                //     profileUrl: result.getString("USERS_PROFILEURL"),
-                //     userStatusid: result.getDate("USERS_USERSTATUSID").toISOString(),
-                // };
+                let result = connection.prepareStatement(script).executeQuery();
+                let users = [];
+                while (result.next()) {
+                    let user = {
+                        username: result.getString("USERS_USERNAME"),
+                        firstname: result.getString("USERS_FIRSTNAME"),
+                        lastname: result.getString("USERS_LASTNAME"),
+                        email: result.getString("USERS_EMAIL"),
+                        phone: result.getString("USERS_PHONE"),
+                        profileUrl: result.getString("USERS_PROFILEURL"),
+                        userStatusid: result.getString("USERS_USERSTATUSID"),
+                    };
+                    users.push(user);
+                }
 
-                response.println(JSON.stringify(result))
-                response.println("\n\n")
+                if (users.length == 1) {
+                    response.println(JSON.stringify(users[0]))
+                } else {
+                    response.println(JSON.stringify(users))
+                }
                 connection.close();
-                // response.println(JSON.stringify(user))
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -88,7 +104,7 @@ rs.service({
                     .set("USERS_USERNAME", body.username).set("USERS_FIRSTNAME", body.firstname)
                     .set("USERS_LASTNAME", body.lastname).set("USERS_PHONE", body.phone)
                     .set("USERS_PROFILEURL", body.profileUrl).set("USERS_USERSTATUSID", body.userStatusid)
-                    .table("CODBEX_USERS").where(`USERS_USERNAME=${request.params.username}`).build();
+                    .table("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
                 let result = connection.prepareStatement(script).executeQuery().next();
 
@@ -104,9 +120,8 @@ rs.service({
         "delete": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
-                let body = request.params.username;
                 let script = sql.getDialect().delete()
-                    .from("CODBEX_USERS").where(`USERS_USERNAME=${request.params.username}`).build();
+                    .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
                 let result = connection.prepareStatement(script).executeQuery().next();
 
