@@ -132,6 +132,7 @@ rs.service({
                 response.println(err);
             }
         }],
+
         "delete": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
