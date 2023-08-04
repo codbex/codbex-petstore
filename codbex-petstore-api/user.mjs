@@ -4,8 +4,6 @@ import { database, sql } from "@dirigible/db";
 const daoUsers = require("codbex-petstore/gen/dao/Users/Users.js");
 const daoUserStatus = require("codbex-petstore/gen/dao/entities/userStatus.js");
 
-// const userStatuses = ["Anonynous", "Active", "Inactive", "Blocked"];
-
 const userStatuses = [];
 const statusList = daoUserStatus.list();
 statusList.forEach(elem => { userStatuses.push(elem.name) });
@@ -23,16 +21,6 @@ const isValidUrl = (urlString) => {
     return !!urlPattern.test(urlString);
 };
 
-
-
-const getMethods = (obj) => {
-    let properties = new Set()
-    let currentObj = obj
-    do {
-        Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
-    } while ((currentObj = Object.getPrototypeOf(currentObj)))
-    return [...properties.keys()].filter(item => typeof obj[item] === 'function')
-}
 
 rs.service({
     "user": {
@@ -64,9 +52,6 @@ rs.service({
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
                 let script = sql.getDialect().select()
-                    // .column("USERS_FIRSTNAME").column("USERS_LASTNAME")
-                    // .column("USERS_EMAIL").column("USERS_PHONE")
-                    // .column("USERS_PROFILEURL").column("USERS_USERSTATUSID")
                     .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
                 let result = connection.prepareStatement(script).executeQuery();
@@ -84,9 +69,14 @@ rs.service({
                     users.push(user);
                 }
 
-                if (users.length == 1) {
+                if (users.length == 0) {
+                    response.setStatus(404);
+                    response.println("User Not Found!")
+                } else if (users.length == 1) {
+                    response.setContentType("application/json");
                     response.println(JSON.stringify(users[0]))
                 } else {
+                    response.setContentType("application/json");
                     response.println(JSON.stringify(users))
                 }
                 connection.close();
@@ -99,36 +89,58 @@ rs.service({
         "put": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
-                let body = request.params.username;
-                let script = sql.getDialect().update()
-                    .set("USERS_USERNAME", body.username).set("USERS_FIRSTNAME", body.firstname)
-                    .set("USERS_LASTNAME", body.lastname).set("USERS_PHONE", body.phone)
-                    .set("USERS_PROFILEURL", body.profileUrl).set("USERS_USERSTATUSID", body.userStatusid)
-                    .table("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
+                let body = request.getJSON();
 
-                let result = connection.prepareStatement(script).executeQuery().next();
+                // check params in body
+                if (body.username && body.firstname && body.lastname && body.phone && body.profileUrl && body.userStatus) {
+                    response.println("Bad Request");
+                    response.setStatus(400);
+                    return;
+                }
+
+                let scriptSQL = sql.getDialect().update()
+                if (body.username) scriptSQL.set("USERS_USERNAME", `'${body.username}'`)
+                if (body.firstname) scriptSQL.set("USERS_FIRSTNAME", `'${body.firstname}'`)
+                if (body.lastname) scriptSQL.set("USERS_LASTNAME", `'${body.lastname}'`)
+                if (body.phone) scriptSQL.set("USERS_PHONE", `'${body.phone}'`)
+                if (body.profileUrl) scriptSQL.set("USERS_PROFILEURL", `'${body.profileUrl}'`)
+
+                if (body.userStatus) {
+                    body.userStatusid = userStatuses.indexOf(body.userStatus).toString();
+                    // get the statusid from a status
+                    if (body.userStatusid == -1) {
+                        response.println("userStatus is incorrect!")
+                        response.setStatus(400);
+                        return;
+                    }
+
+                    scriptSQL.set("USERS_USERSTATUSID", `'${body.userStatusid}'`)
+                }
 
 
-                response.println(JSON.stringify(result))
-                response.println("\n\n")
-                response.println(JSON.stringify(user))
+                let script = scriptSQL.table("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
+
+                let result = connection.prepareStatement(script).executeUpdate();
+
+                response.setStatus(200)
+                connection.close();
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
             }
         }],
+
         "delete": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
                 let script = sql.getDialect().delete()
                     .from("CODBEX_USERS").where(`USERS_USERNAME = '${request.params.username}'`).build();
 
-                let result = connection.prepareStatement(script).executeQuery().next();
+                let result = connection.prepareStatement(script).executeUpdate();
 
 
-                response.println(JSON.stringify(result))
-                response.println("\n\n")
-                response.println(JSON.stringify(user))
+                response.setStatus(204);
+                connection.close();
             },
             "catch": (_ctx, err, _request, response) => {
                 response.println(err);
@@ -172,5 +184,6 @@ function createUser(body, response) {
     }
 
     response.setStatus(201);
+    response.setContentType("application/json");
     response.println(JSON.stringify(newUser));
 }
