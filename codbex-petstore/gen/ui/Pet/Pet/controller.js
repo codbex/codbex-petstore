@@ -111,7 +111,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.optionspetStatusid = [];
 		$scope.optionspetCategoryid = [];
 
-		$http.get("/services/js/codbex-petstore/gen/api/entities/petStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-petstore/gen/api/entities/PetStatus.js").then(function (response) {
 			$scope.optionspetStatusid = response.data.map(e => {
 				return {
 					value: e.id,
@@ -120,7 +120,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/codbex-petstore/gen/api/entities/petCategory.js").then(function (response) {
+		$http.get("/services/js/codbex-petstore/gen/api/entities/PetCategory.js").then(function (response) {
 			$scope.optionspetCategoryid = response.data.map(e => {
 				return {
 					value: e.id,

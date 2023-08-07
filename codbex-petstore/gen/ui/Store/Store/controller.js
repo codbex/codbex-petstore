@@ -140,7 +140,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
-		$http.get("/services/js/codbex-petstore/gen/api/entities/orderStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-petstore/gen/api/entities/OrderStatus.js").then(function (response) {
 			$scope.optionsorderStatusid = response.data.map(e => {
 				return {
 					value: e.id,

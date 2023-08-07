@@ -313,19 +313,19 @@
                 ]
             },
             {
-                "name": "Pet_petStatus",
+                "name": "Pet_PetStatus",
                 "type": "foreignKey",
                 "table": "CODBEX_PET",
-                "constraintName": "Pet_petStatus",
+                "constraintName": "Pet_PetStatus",
                 "columns": "PET_PETSTATUSID",
                 "referencedTable": "CODBEX_PETSTATUS",
                 "referencedColumns": "PETSTATUS_ID"
             },
             {
-                "name": "Pet_petCategory",
+                "name": "Pet_PetCategory",
                 "type": "foreignKey",
                 "table": "CODBEX_PET",
-                "constraintName": "Pet_petCategory",
+                "constraintName": "Pet_PetCategory",
                 "columns": "PET_PETCATEGORYID",
                 "referencedTable": "CODBEX_PETCATEGORY",
                 "referencedColumns": "PETCATEGORY_ID"
@@ -349,37 +349,37 @@
                 "referencedColumns": "USERS_ID"
             },
             {
-                "name": "Store_orderStatus",
+                "name": "Store_OrderStatus",
                 "type": "foreignKey",
                 "table": "CODBEX_STORE",
-                "constraintName": "Store_orderStatus",
+                "constraintName": "Store_OrderStatus",
                 "columns": "STORE_ORDERSTATUSID",
                 "referencedTable": "CODBEX_ORDERSTATUS",
                 "referencedColumns": "ORDERSTATUS_ID"
             },
             {
-                "name": "Users_userStatus",
+                "name": "Users_UserStatus",
                 "type": "foreignKey",
                 "table": "CODBEX_USERS",
-                "constraintName": "Users_userStatus",
+                "constraintName": "Users_UserStatus",
                 "columns": "USERS_USERSTATUSID",
                 "referencedTable": "CODBEX_USERSTATUS",
                 "referencedColumns": "USERSTATUS_ID"
             },
             {
-                "name": "photoUrl_Pet",
+                "name": "PhotoUrl_Pet",
                 "type": "foreignKey",
                 "table": "CODBEX_PHOTOURLS",
-                "constraintName": "photoUrl_Pet",
+                "constraintName": "PhotoUrl_Pet",
                 "columns": "PHOTOURLS_PETID",
                 "referencedTable": "CODBEX_PET",
                 "referencedColumns": "ENTITY1_ID"
             },
             {
-                "name": "tag_Pet",
+                "name": "Tag_Pet",
                 "type": "foreignKey",
                 "table": "CODBEX_TAG",
-                "constraintName": "tag_Pet",
+                "constraintName": "Tag_Pet",
                 "columns": "TAG_PETID",
                 "referencedTable": "CODBEX_PET",
                 "referencedColumns": "ENTITY1_ID"

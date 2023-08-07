@@ -107,7 +107,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//----------------Dropdowns-----------------//
 		$scope.optionsuserStatusid = [];
 
-		$http.get("/services/js/codbex-petstore/gen/api/entities/userStatus.js").then(function (response) {
+		$http.get("/services/js/codbex-petstore/gen/api/entities/UserStatus.js").then(function (response) {
 			$scope.optionsuserStatusid = response.data.map(e => {
 				return {
 					value: e.id,

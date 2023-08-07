@@ -53,8 +53,8 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
-                        "relationshipName": "Pet_petStatus",
-                        "relationshipEntityName": "petStatus",
+                        "relationshipName": "Pet_PetStatus",
+                        "relationshipEntityName": "PetStatus",
                         "relationshipEntityPerspectiveName": "entities"
                     },
                     {
@@ -75,8 +75,8 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
-                        "relationshipName": "Pet_petCategory",
-                        "relationshipEntityName": "petCategory",
+                        "relationshipName": "Pet_PetCategory",
+                        "relationshipEntityName": "PetCategory",
                         "relationshipEntityPerspectiveName": "entities"
                     }
                 ],
@@ -230,8 +230,8 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
-                        "relationshipName": "Store_orderStatus",
-                        "relationshipEntityName": "orderStatus",
+                        "relationshipName": "Store_OrderStatus",
+                        "relationshipEntityName": "OrderStatus",
                         "relationshipEntityPerspectiveName": "entities"
                     }
                 ],
@@ -405,8 +405,8 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
-                        "relationshipName": "Users_userStatus",
-                        "relationshipEntityName": "userStatus",
+                        "relationshipName": "Users_UserStatus",
+                        "relationshipEntityName": "UserStatus",
                         "relationshipEntityPerspectiveName": "entities"
                     }
                 ],
@@ -482,7 +482,7 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
-                        "relationshipName": "photoUrl_Pet",
+                        "relationshipName": "PhotoUrl_Pet",
                         "relationshipEntityName": "Pet",
                         "relationshipEntityPerspectiveName": "Pet"
                     }
@@ -496,7 +496,7 @@
                 "menuIndex": "100",
                 "menuKey": "photourls",
                 "menuLabel": "photoUrls",
-                "name": "photoUrl",
+                "name": "PhotoUrl",
                 "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
                 "perspectiveName": "entities",
@@ -555,7 +555,7 @@
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetType": "DROPDOWN",
-                        "relationshipName": "tag_Pet",
+                        "relationshipName": "Tag_Pet",
                         "relationshipEntityName": "Pet",
                         "relationshipEntityPerspectiveName": "Pet"
                     }
@@ -569,7 +569,7 @@
                 "menuIndex": "100",
                 "menuKey": "tag",
                 "menuLabel": "tag",
-                "name": "tag",
+                "name": "Tag",
                 "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
                 "perspectiveName": "entities",
@@ -620,7 +620,7 @@
                 "menuIndex": "100",
                 "menuKey": "petstatus",
                 "menuLabel": "petStatus",
-                "name": "petStatus",
+                "name": "PetStatus",
                 "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
                 "perspectiveName": "entities",
@@ -671,7 +671,7 @@
                 "menuIndex": "100",
                 "menuKey": "petcategory",
                 "menuLabel": "petCategory",
-                "name": "petCategory",
+                "name": "PetCategory",
                 "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
                 "perspectiveName": "entities",
@@ -722,7 +722,7 @@
                 "menuIndex": "100",
                 "menuKey": "orderstatus",
                 "menuLabel": "orderStatus",
-                "name": "orderStatus",
+                "name": "OrderStatus",
                 "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
                 "perspectiveName": "entities",
@@ -773,7 +773,7 @@
                 "menuIndex": "100",
                 "menuKey": "userstatus",
                 "menuLabel": "userStatus",
-                "name": "userStatus",
+                "name": "UserStatus",
                 "navigationPath": "/Home",
                 "perspectiveIcon": "/services/web/resources/unicons/copy.svg",
                 "perspectiveName": "entities",
