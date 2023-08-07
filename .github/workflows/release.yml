@@ -19,7 +19,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Build and Push Docker Image
+    - name: Build and Push Docker Image Web IDE
       run: |
         docker buildx create --name codbex-builder
         docker buildx use codbex-builder
@@ -27,6 +27,14 @@ jobs:
         docker login ghcr.io -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
         docker buildx build --push --tag ghcr.io/codbex/codbex-petstore:${{ github.event.inputs.releaseVersion }} -o type=image --platform=linux/arm64,linux/amd64 .
 
+
+    - name: Build and Push Docker Image Runtime
+      run: |
+        docker buildx create --name codbex-builder-runtime
+        docker buildx use codbex-builder-runtime
+        docker buildx build --tag codbex-petstore-runtime -f DockerfileRuntime -o type=image --platform=linux/arm64,linux/amd64 .
+        docker login ghcr.io -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        docker buildx build --push --tag ghcr.io/codbex/codbex-petstore-runtime:${{ github.event.inputs.releaseVersion }} -f DockerfileRuntime -o type=image --platform=linux/arm64,linux/amd64 .
     - name: "Create Release"
       id: create_release
       uses: softprops/action-gh-release@v1
