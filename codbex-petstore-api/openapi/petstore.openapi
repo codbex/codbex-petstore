@@ -9,7 +9,7 @@ info:
     url: https://github.com/codbex/codbex-petstore/blob/main/LICENSE
   version: 1.0.0
 servers:
-- url: /services/js/codbex-petstore-api
+- url: /services/js
 tags:
 - name: pet
   description: Everything about your Pets
@@ -18,7 +18,7 @@ tags:
 - name: user
   description: Operations about user
 paths:
-  /pet.mjs:
+  /codbex-petstore-api/pet.mjs:
     put:
       tags:
       - pet
@@ -63,7 +63,7 @@ paths:
                 $ref: '#/components/schemas/Pet'
         405:
           description: Invalid input
-  /pet.mjs/findByStatus:
+  /codbex-petstore-api/pet.mjs/findByStatus:
     get:
       tags:
       - pet
@@ -94,7 +94,7 @@ paths:
           description: successful operation
         400:
           description: Invalid status value
-  /pet.mjs/{petId}:
+  /codbex-petstore-api/pet.mjs/{petId}:
     get:
       tags:
       - pet
@@ -164,7 +164,7 @@ paths:
           description: Invalid ID supplied
         404:
           description: Pet not found
-  /pet.mjs/{petId}/uploadImage:
+  /codbex-petstore-api/pet.mjs/{petId}/uploadImage:
     post:
       tags:
       - pet
@@ -197,7 +197,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
-  /store.mjs/inventory:
+  /codbex-petstore-api/store.mjs/inventory:
     get:
       tags:
       - store
@@ -214,7 +214,7 @@ paths:
                 additionalProperties:
                   type: integer
                   format: int32
-  /store.mjs/order:
+  /codbex-petstore-api/store.mjs/order:
     post:
       tags:
       - store
@@ -233,7 +233,7 @@ paths:
                 $ref: '#/components/schemas/Order'
         400:
           description: Invalid Order
-  /store.mjs/order/{orderId}:
+  /codbex-petstore-api/store.mjs/order/{orderId}:
     get:
       tags:
       - store
@@ -279,7 +279,7 @@ paths:
           description: Invalid ID supplied
         404:
           description: Order not found
-  /user.mjs:
+  /codbex-petstore-api/user.mjs:
     post:
       tags:
       - user
@@ -292,7 +292,7 @@ paths:
       responses:
         default:
           description: successful operation
-  /user.mjs/createWithList:
+  /codbex-petstore-api/user.mjs/createWithList:
     post:
       tags:
       - user
@@ -307,7 +307,7 @@ paths:
       responses:
         default:
           description: successful operation
-  /user.mjs/{username}:
+  /codbex-petstore-api/user.mjs/{username}:
     get:
       tags:
       - user
