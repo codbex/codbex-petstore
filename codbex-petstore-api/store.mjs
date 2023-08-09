@@ -21,7 +21,7 @@ function isValidDate(dateString) {
 }
 
 rs.service({
-	"store/order": {
+	"order": {
 		"post": [{
 			"serve": (_ctx, request, response) => {
 				const body = request.getJSON();
@@ -89,7 +89,7 @@ rs.service({
 		}]
 	},
 
-	"store/order/:orderId": {
+	"order/:orderId": {
 		"get": [{
 			"serve": (_ctx, request, response) => {
 				const order = daoStore.get(request.params.orderId);
@@ -137,7 +137,7 @@ rs.service({
 		}]
 	},
 
-	"store/inventory": {
+	"inventory": {
 		"get": [{
 			"serve": (_ctx, _request, response) => {
 				let allPets = daoPet.list();

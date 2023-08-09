@@ -28,7 +28,7 @@ const isValidUrl = (urlString) => {
 };
 
 rs.service({
-    "pet/:petId/uploadImage": {
+    ":petId/uploadImage": {
         "post": [{
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
@@ -229,7 +229,7 @@ rs.service({
         }]
     },
 
-    "pet/findByStatus": {
+    "findByStatus": {
         "get": [{
             "serve": (_ctx, request, response) => {
                 const body = request.getJSON();
@@ -267,7 +267,7 @@ rs.service({
         }]
     },
 
-    "pet/:petid": {
+    ":petid": {
         "get": [{
             "serve": (_ctx, request, response) => {
                 const pet = daoPet.get(request.params.petid);

@@ -23,7 +23,7 @@ const isValidUrl = (urlString) => {
 
 
 rs.service({
-    "user": {
+    "": {
         "post": [{
             "serve": (_ctx, request, response) => {
                 createUser(request.getJSON(), response);
@@ -34,7 +34,7 @@ rs.service({
         }]
     },
 
-    "user/createWithList": {
+    "createWithList": {
         "post": [{
             "serve": (_ctx, request, response) => {
                 let body = request.getJSON();
@@ -47,7 +47,7 @@ rs.service({
         }]
     },
 
-    "user/:username": {
+    ":username": {
         "get": [{
             "serve": (_ctx, request, response) => {
                 let connection = database.getConnection("DefaultDB");
