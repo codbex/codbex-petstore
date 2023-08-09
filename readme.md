@@ -90,7 +90,9 @@ Update a user.
 Delete a user. 
 
 
-## 
+## The EDM:
+
+![emd-image](https://github-production-user-asset-6210df.s3.amazonaws.com/80454439/259375599-399094b7-78eb-4c47-a226-47f3fefe8f61.jpg)
 
 ## License 
 This API is released under the Eclipse Public License - v 2.0. For more details, please refer to the [LICENSE](LICENSE) file. Please note that this API is for demonstration purposes only and should not be used in production environments.
