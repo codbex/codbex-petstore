@@ -2,8 +2,32 @@
 
 This API allows you to interact with a pet store application. It provides a set of endpoints to perform various operations related to pets, inventory, orders, and users. 
 
-## Installation 
-To use this API, you need to have Eclipse Dirigible installed on your machine. Follow the official documentation of Eclipse Dirigible for installation instructions. 
+
+## Setup Instructions 
+### Prerequisites - Docker installed on your machine 
+
+### Step 1: 
+Pull Docker Images To use the Petstore API, you need to pull the Docker images for the web UI and the runtime. 
+
+#### Web UI 
+Run the following command to pull the Docker image for the web IDE: 
+``` docker pull ghcr.io/codbex/codbex-petstore:latest ``` 
+
+#### Runtime 
+Coming soon. 
+
+
+### Step 2: 
+Start Docker Containers Once you have pulled the Docker images, you can start the containers. #### Web UI Run the following command to start the container for the web IDE: 
+``` docker run -p 8080:8080 ghcr.io/codbex/codbex-petstore:latest ``` 
+
+#### Runtime 
+Coming soon. 
+
+
+### Step 3: 
+Access the Petstore API Once the containers are up and running, you can access the Petstore API using the provided endpoints. 
+
 
 ## Usage 
 Once you have Eclipse Dirigible set up, you can use the following endpoints provided by the API. 
