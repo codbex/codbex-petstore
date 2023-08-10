@@ -14,15 +14,21 @@ Run the following command to pull the Docker image for the web IDE:
 ``` docker pull ghcr.io/codbex/codbex-petstore:latest ``` 
 
 #### Runtime 
-Coming soon. 
+Run the following command to pull the Docker image for the runtime: 
+``` docker pull ghcr.io/codbex/codbex-petstore-runtime:latest ``` 
 
 
 ### Step 2: 
-Start Docker Containers Once you have pulled the Docker images, you can start the containers. #### Web UI Run the following command to start the container for the web IDE: 
+Start Docker Containers Once you have pulled the Docker images, you can start the containers. 
+
+#### Web UI 
+Run the following command to start the container for the web IDE image: 
 ``` docker run -p 8080:8080 ghcr.io/codbex/codbex-petstore:latest ``` 
 
+
 #### Runtime 
-Coming soon. 
+Run the following command to start the container for the runtime image: 
+``` docker run -p 8080:8080 ghcr.io/codbex/codbex-petstore-runtime:latest ``` 
 
 
 ### Step 3: 
@@ -95,4 +101,4 @@ Delete a user.
 ![emd-image](https://github-production-user-asset-6210df.s3.amazonaws.com/80454439/259375599-399094b7-78eb-4c47-a226-47f3fefe8f61.jpg)
 
 ## License 
-This API is released under the Eclipse Public License - v 2.0. For more details, please refer to the [LICENSE](LICENSE) file. Please note that this API is for demonstration purposes only and should not be used in production environments.
+This API is released under the Eclipse Public License - v 2.0. For more details, please refer to the [LICENSE](LICENSE) file. 
