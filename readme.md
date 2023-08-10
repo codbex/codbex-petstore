@@ -7,7 +7,7 @@ This API allows you to interact with a pet store application. It provides a set 
 ### Prerequisites - Docker installed on your machine 
 
 ### Step 1: 
-Pull Docker Images To use the Petstore API, you need to pull the Docker images for the web UI and the runtime. 
+To use the Petstore API, you need to download the Docker images that contain the necessary components.
 
 #### Web UI 
 Run the following command to pull the Docker image for the web IDE: 
@@ -35,58 +35,58 @@ Once you have Eclipse Dirigible set up, you can use the following endpoints prov
 
 ### Pet Endpoints 
 
-#### PUT `/pet`
+#### PUT `/pet.mjs`
 Update an existing pet in the store. 
 
-#### POST `/pet` 
+#### POST `/pet.mjs` 
 Add a new pet to the store. 
 
-#### GET `/pet/findByStatus` 
+#### GET `/pet.mjs/findByStatus` 
 Find pets by status.
 
-#### GET `/pet/{petId} `
+#### GET `/pet.mjs/{petId} `
 Find a pet by its ID. 
 
-#### POST `/pet/{petId}`
+#### POST `/pet.mjs/{petId}`
 Update a pet in the store with form data. 
 
-#### DELETE `/pet/{petId}` 
+#### DELETE `/pet.mjs/{petId}` 
 Delete a pet from the store. 
 
-#### POST `/pet/{petId}/uploadImage` 
+#### POST `/pet.mjs/{petId}/uploadImage` 
 Upload an image for a pet. 
 
 
 ### Store Endpoints 
 
-#### GET `/store/inventory` 
+#### GET `/store.mjs/inventory` 
 Returns pet inventories by status.
 
-#### POST `/store/order` 
+#### POST `/store.mjs/order` 
 Place an order for a pet. 
 
-### GET `/store/order/{orderId}` 
+### GET `/store.mjs/order/{orderId}` 
 Find a purchase order by its ID. 
 
-#### DELETE `/store/order/{orderId}` 
+#### DELETE `/store.mjs/order/{orderId}` 
 Delete a purchase order by its ID. 
 
 
 ### User Endpoints 
 
-#### POST `/user` 
+#### POST `/user.mjs` 
 Create a new user. 
 
-#### POST `/user/createWithList` 
+#### POST `/user.mjs/createWithList` 
 Create a list of users with a given input array. 
 
-#### GET `/user/{username}`
+#### GET `/user.mjs/{username}`
 Get a user by their username. 
 
-#### PUT `/user/{username}` 
+#### PUT `/user.mjs/{username}` 
 Update a user. 
 
-#### DELETE `/user/{username}` 
+#### DELETE `/user.mjs/{username}` 
 Delete a user. 
 
 
