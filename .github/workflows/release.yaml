@@ -17,7 +17,7 @@ jobs:
       application-name: codbex-petstore
       release-version: ${{ inputs.release-version }}
       release-content: |
-        ## codbex-aion - ${{ github.event.inputs.releaseVersion }}
+        ## codbex-aion - ${{ github.event.inputs.release-version }}
   
         Pet Store Application
   
