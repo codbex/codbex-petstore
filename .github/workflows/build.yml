@@ -14,24 +14,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Build Docker Image With Web IDE
+      - name: Build Docker Image
         run: |
           docker buildx create --name codbex-builder
           docker buildx use codbex-builder
           docker buildx build --tag codbex-petstore -o type=image --platform=linux/arm64,linux/amd64 .
           
-      - name: Push Docker Image With Web IDE
+      - name: Push Docker Image
         run: |
           docker login ghcr.io -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
           docker buildx build --push --tag ghcr.io/codbex/codbex-petstore:latest -o type=image --platform=linux/arm64,linux/amd64 .
-
-      - name: Build Docker Image Runtime
-        run: |
-          docker buildx create --name codbex-builder-runtime
-          docker buildx use codbex-builder-runtime
-          docker buildx build --tag codbex-petstore-runtime -f DockerfileRuntime -o type=image --platform=linux/arm64,linux/amd64 .          
-      - name: Push Docker Image Runtime
-        run: |
-          docker login ghcr.io -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-          docker buildx build --push --tag ghcr.io/codbex/codbex-petstore-runtime:latest -f DockerfileRuntime -o type=image --platform=linux/arm64,linux/amd64 .
-          
