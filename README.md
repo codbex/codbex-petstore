@@ -1,6 +1,24 @@
-# Petstore project with eclipse-dirigible
+# codbex-petstore
 
 This API allows you to interact with a pet store application. It provides a set of endpoints to perform various operations related to pets, inventory, orders, and users. 
+
+## Model
+
+![emd-image](https://github-production-user-asset-6210df.s3.amazonaws.com/80454439/259375599-399094b7-78eb-4c47-a226-47f3fefe8f61.jpg)
+
+## Application
+
+## Build
+
+	docker build -t codbex-petstore .
+
+## Run
+
+	docker run --name codbex-petstore -d -p 8080:8080 codbex-hermes
+
+## Clean
+
+	docker rm codbex-petstore
 
 
 ## Setup Instructions 
@@ -102,11 +120,6 @@ Update a user.
 
 #### DELETE `/user.mjs/{username}` 
 Delete a user. 
-
-
-## The EDM:
-
-![emd-image](https://github-production-user-asset-6210df.s3.amazonaws.com/80454439/259375599-399094b7-78eb-4c47-a226-47f3fefe8f61.jpg)
 
 ## License 
 This API is released under the Eclipse Public License - v 2.0. For more details, please refer to the [LICENSE](LICENSE) file. 
