@@ -14,7 +14,7 @@ This API allows you to interact with a pet store application. It provides a set 
 
 ## Run
 
-	docker run --name codbex-petstore -d -p 8080:8080 codbex-hermes
+	docker run --name codbex-petstore -d -p 8080:8080 codbex-petstore
 
 ## Clean
 
