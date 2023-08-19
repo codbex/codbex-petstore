@@ -7,10 +7,13 @@ This API allows you to interact with a pet store application. It provides a set 
 ![emd-image](https://github-production-user-asset-6210df.s3.amazonaws.com/80454439/259375599-399094b7-78eb-4c47-a226-47f3fefe8f61.jpg)
 
 ## Application
-
 ## Build
 
 	docker build -t codbex-petstore .
+ 
+## PULL
+
+	docker pull ghcr.io/codbex/codbex-petstore:latest
 
 ## Run
 
