@@ -1,7 +1,7 @@
 # Docker descriptor for codbex-petstore
 # License - http://www.eclipse.org/legal/epl-v20.html
 
-FROM ghcr.io/codbex/codbex-gaia:0.9.0
+FROM dirigiblelabs/dirigible:latest
 
 COPY codbex-petstore target/dirigible/repository/root/registry/public/codbex-petstore
 COPY codbex-petstore-data target/dirigible/repository/root/registry/public/codbex-petstore-data
