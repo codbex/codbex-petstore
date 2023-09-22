@@ -1,10 +1,10 @@
 import { rs } from "@dirigible/http"
 
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
-const daoImg = require("codbex-petstore/gen/dao/entities/photoUrl.js");
-const daoTag = require("codbex-petstore/gen/dao/entities/tag.js");
-const daoPetStatus = require("codbex-petstore/gen/dao/entities/petStatus.js");
-const daoPetCategory = require("codbex-petstore/gen/dao/entities/petCategory.js");
+const daoImg = require("codbex-petstore/gen/dao/entities/PhotoUrl.js");
+const daoTag = require("codbex-petstore/gen/dao/entities/Tag.js");
+const daoPetStatus = require("codbex-petstore/gen/dao/entities/PetStatus.js");
+const daoPetCategory = require("codbex-petstore/gen/dao/entities/PetCategory.js");
 
 const categoryList = daoPetCategory.list();
 const petCategory = [];
