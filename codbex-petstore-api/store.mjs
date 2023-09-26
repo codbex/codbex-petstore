@@ -2,8 +2,8 @@ import { rs } from "@dirigible/http"
 const daoStore = require("codbex-petstore/gen/dao/Store/Store.js");
 const daoPet = require("codbex-petstore/gen/dao/Pet/Pet.js");
 const daoUser = require("codbex-petstore/gen/dao/Users/Users.js");
-const daoPetStatus = require("codbex-petstore/gen/dao/entities/petStatus.js");
-const daoOrderStatus = require("codbex-petstore/gen/dao/entities/orderStatus.js");
+const daoPetStatus = require("codbex-petstore/gen/dao/entities/PetStatus.js");
+const daoOrderStatus = require("codbex-petstore/gen/dao/entities/OrderStatus.js");
 
 const orderList = daoOrderStatus.list();
 const orderStatus = [];

@@ -2,7 +2,7 @@ import { rs } from "@dirigible/http";
 import { database, sql } from "@dirigible/db";
 
 const daoUsers = require("codbex-petstore/gen/dao/Users/Users.js");
-const daoUserStatus = require("codbex-petstore/gen/dao/entities/userStatus.js");
+const daoUserStatus = require("codbex-petstore/gen/dao/entities/UserStatus.js");
 
 const userStatuses = [];
 const statusList = daoUserStatus.list();
